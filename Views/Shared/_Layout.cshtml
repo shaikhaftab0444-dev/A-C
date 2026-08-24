@@ -510,6 +510,22 @@
             max-width: 270px;
         }
 
+        .footer-address {
+            font-size: 13px;
+            color: rgba(250,246,238,.65);
+            line-height: 1.6;
+            margin-top: 14px;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+            .footer-address i {
+                color: var(--gold-light);
+                margin-top: 3px;
+                font-size: 14px;
+            }
+
         .footer-heading {
             font-size: 11px;
             font-weight: 700;
@@ -536,7 +552,7 @@
         .footer-social {
             display: flex;
             gap: 10px;
-            margin-top: 26px;
+            margin-top: 20px;
         }
 
         .social-btn {
@@ -741,11 +757,15 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-brand text-uppercase"><span class="brand-mark"></span> AQSA COLLECTION</div>
                         <p class="footer-brand-desc">Your premier online boutique for fine jewelry and luxury accessories. Cut, set and finished with elegance in every detail.</p>
+                        <div class="footer-address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>Shahganj Gandhi Putla, Aurangabad, Chhatrapati Sambhaji Nagar.</div>
+                        </div>
                         <div class="footer-social">
-                            <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+                            <a href="https://www.instagram.com/aqsa_collection_mh20/" target="_blank" rel="noopener noreferrer" class="social-btn" title="Follow us on Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-btn" title="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3 col-6">
@@ -812,12 +832,12 @@
         $(document).ready(function () {
             @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
             {
-                        <text>updateCartBadge(); updateWishlistBadge();</text>
+                    <text>updateCartBadge(); updateWishlistBadge();</text>
             }
         });
         @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
         {
-                    <text>setInterval(function () { updateCartBadge(); updateWishlistBadge(); }, 30000);</text>
+                <text>setInterval(function () { updateCartBadge(); updateWishlistBadge(); }, 30000);</text>
         }
 
         // ===== Global scroll-reveal for any element carrying [data-reveal] =====
