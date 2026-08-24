@@ -19,6 +19,7 @@ wwwroot\images\categoryimages\shirt.webp
 wwwroot\images\categoryimages\shoes.jpg
 wwwroot\images\categoryimages\sports&fitness.jpg
 wwwroot\images\offers\8e055743-0394-486b-8630-51f61641f3f3.jpg
+wwwroot\images\offers\c32f7976-7761-4951-8812-b52e9ca0f99e.jpg
 wwwroot\images\products\08efde93-33b2-4ad7-958f-85e9728479cb.webp
 wwwroot\images\products\2e9596ca-b708-47fe-b6c5-ffc334eb301e.jpg
 wwwroot\images\products\3161862d-8490-46aa-8698-c7530b764719.jpg
@@ -66,6 +67,7 @@ wwwroot\images\products\images.jpeg
 wwwroot\images\products\profile.png
 wwwroot\images\products\sale.jpg
 wwwroot\images\products\sh.jpg
+wwwroot\images\promo_banner_wide.png
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map

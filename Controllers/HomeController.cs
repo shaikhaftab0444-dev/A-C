@@ -55,6 +55,15 @@ namespace BrandsStore.Controllers
                     .OrderBy(c => c.Name)
                     .ToListAsync();
 
+                // Auto-update active offer background image for demo/mockup sync
+                var activeOffer = await _context.Offers.FirstOrDefaultAsync(o => o.IsActive);
+                if (activeOffer != null && (string.IsNullOrEmpty(activeOffer.BackgroundImageUrl) || activeOffer.BackgroundImageUrl != "/images/promo_banner_wide.png"))
+                {
+                    activeOffer.BackgroundImageUrl = "/images/promo_banner_wide.png";
+                    activeOffer.ImageUrl = null; // Clear hero image to let background show full bleed
+                    await _context.SaveChangesAsync();
+                }
+
                 // ? NEW: Active offers for the hero carousel
                 ViewBag.HeroOffers = await _context.Offers
                     .Where(o => o.IsActive)

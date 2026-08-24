@@ -9,153 +9,161 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BrandsStore
 build_property.RootNamespace = BrandsStore
-build_property.ProjectDir = C:\Users\Admin\source\repos\BrandsStore\
+build_property.ProjectDir = C:\Users\Admin\source\repos\Aqsa-Collection\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Admin\source\repos\BrandsStore
+build_property.MSBuildProjectDirectory = C:\Users\Admin\source\repos\Aqsa-Collection
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Account/AccessDenied.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Account/ChangePassword.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Account/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Account/ForgotPassword.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Account/Login.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Account/Profile.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Account/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Account/Register.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Account/ResetPassword.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Account/ResetPasswordError.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Account/ResetPasswordError.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Account/ResetPasswordSuccess.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Account/ResetPasswordSuccess.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkU3VjY2Vzcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Account/VerifyOtp.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Account/VerifyOtp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxWZXJpZnlPdHAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Admin/Categories.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Admin/Categories.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2F0ZWdvcmllcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Admin/CreateProduct.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Admin/CreateCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlQ2F0ZWdvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Admin/CreateProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlUHJvZHVjdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Admin/EditProduct.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Admin/EditCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdENhdGVnb3J5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Admin/EditProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdFByb2R1Y3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Admin/Index.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Admin/Offers.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Admin/Offers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cT2ZmZXJzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Admin/OrderDetails.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Admin/OrderDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cT3JkZXJEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Admin/Orders.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Admin/Orders.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cT3JkZXJzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Admin/Products.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Admin/Products.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUHJvZHVjdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Admin/Users.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Admin/Users.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Cart/BuyNowCheckout.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Cart/BuyNowCheckout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxCdXlOb3dDaGVja291dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Cart/Checkout.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Cart/Checkout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxDaGVja291dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Cart/Index.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Cart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Cart/MyOrders.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Cart/MyOrders.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxNeU9yZGVycy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Cart/OrderConfirmation.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Cart/OrderConfirmation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxPcmRlckNvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Cart/OrderDetails.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Cart/OrderDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxPcmRlckRldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Home/Index.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Home/Privacy.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Home/ProductDetails.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Home/ProductDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9kdWN0RGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Home/Products.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Home/Products.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9kdWN0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Support/Index.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Support/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VwcG9ydFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Wishlist/Index.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Wishlist/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcV2lzaGxpc3RcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/_ViewImports.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/_ViewStart.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Admin/source/repos/BrandsStore/Views/Shared/_Layout.cshtml]
+[C:/Users/Admin/source/repos/Aqsa-Collection/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-8ehd9g98s1

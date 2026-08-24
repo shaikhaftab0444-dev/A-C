@@ -1,4 +1,4 @@
-﻿@model BrandsStore.Models.Product
+@model BrandsStore.Models.Product
 
 @{
     ViewData["Title"] = Model.Name;
@@ -587,96 +587,106 @@
     }
 
     .btn-buy-now {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        width: 100%;
-        padding: 16px 24px;
-        background: var(--accent);
-        color: white;
-        border: none;
-        border-radius: var(--radius-md);
-        font-family: 'DM Sans', sans-serif;
-        font-size: 15px;
-        font-weight: 800;
-        cursor: pointer;
-        transition: var(--transition);
-        text-decoration: none;
-        letter-spacing: 0.3px;
+        display: none !important;
     }
-
-        .btn-buy-now:hover {
-            background: var(--accent-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 36px rgba(232,54,93,0.3);
-            color: white;
-        }
-
-        .btn-buy-now:disabled {
-            background: var(--surface-3);
-            color: var(--ink-muted);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
 
     .btn-cart-add {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
         width: 100%;
-        padding: 15px 24px;
-        background: white;
-        color: var(--ink);
-        border: 1.5px solid var(--surface-3);
-        border-radius: var(--radius-md);
+        padding: 16px 24px;
+        background: #0f2c59 !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 4px !important;
         font-family: 'DM Sans', sans-serif;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
         cursor: pointer;
         transition: var(--transition);
         text-decoration: none;
     }
-
-        .btn-cart-add:hover {
-            background: var(--ink);
-            color: white;
-            border-color: var(--ink);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(10,10,15,0.2);
-        }
-
-        .btn-cart-add:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
+    .btn-cart-add:hover {
+        background: #1e457e !important;
+        transform: translateY(-2px);
+    }
+    .btn-cart-add:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
 
     .btn-wishlist-add {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
         width: 100%;
-        padding: 13px 24px;
-        background: transparent;
-        color: var(--ink-muted);
-        border: 1.5px solid var(--surface-3);
-        border-radius: var(--radius-md);
+        padding: 14px 24px;
+        background: white !important;
+        color: #0f2c59 !important;
+        border: 1.5px solid #0f2c59 !important;
+        border-radius: 4px !important;
         font-family: 'DM Sans', sans-serif;
-        font-size: 14px;
-        font-weight: 600;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
         cursor: pointer;
         transition: var(--transition);
+        text-decoration: none;
+        margin-top: 8px;
+    }
+    .btn-wishlist-add:hover {
+        background: #f0f4f8 !important;
     }
 
-        .btn-wishlist-add:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: var(--accent-glow);
-        }
+    /* Accordion styles */
+    .detail-accordion {
+        margin-top: 32px;
+        border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .accordion-item-custom {
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .accordion-btn-custom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 20px 0;
+        background: transparent;
+        border: none;
+        outline: none;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--ink);
+        text-align: left;
+        cursor: pointer;
+    }
+    .accordion-btn-custom i {
+        font-size: 12px;
+        transition: transform 0.3s ease;
+    }
+    .accordion-btn-custom.active i {
+        transform: rotate(180deg);
+    }
+    .accordion-panel-custom {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    .accordion-content-custom {
+        padding: 0 0 20px 0;
+        font-size: 14px;
+        color: var(--ink-soft);
+        line-height: 1.75;
+    }
 
     .oos-notice {
         background: #fff8f9;
@@ -1059,189 +1069,154 @@
                         <div class="delivery-chip gold"><i class="fas fa-shield-alt"></i> Authentic product</div>
                     </div>
                 </div>
-
                 <!-- RIGHT: Info Panel -->
                 <div class="info-panel">
-                    <div class="meta-row">
-                        <span class="meta-chip cat"><i class="fas fa-tag"></i> @Model.Category.Name</span>
-                        @if (Model.StockQuantity > 0)
+                    <h1 class="product-title" style="font-family: 'Playfair Display', serif; font-weight: 700; margin-bottom: 8px;">Product Title - '@Model.Name'</h1>
+                    
+                    <p class="desc-text" style="color: var(--ink-soft); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                        @if (!string.IsNullOrEmpty(Model.Description))
                         {
-                            <span class="meta-chip in-stock"><span class="pulse-dot"></span> In Stock</span>
+                            @Model.Description
                         }
                         else
                         {
-
-                            <span class="meta-chip out-stock"><i class="fas fa-times-circle"></i> Out of Stock</span>
+                            <text>Description a modern elegant online jewelry and accessories store with customer relevant and custom accessories made from organic gold and sterling silver products.</text>
                         }
+                    </p>
+
+                    <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 24px; letter-spacing: 0.05em; text-transform: uppercase;">
+                        MATERIAL: <span style="font-weight: 500; color: var(--ink-muted);">18K Yellow Gold | 925 Sterling Silver</span>
                     </div>
 
-                    <h1 class="product-title">@Model.Name</h1>
-
-                    <div class="stars-row">
-                        <div class="stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="rating-val">4.5</span>
-                        <a href="#reviews" class="review-link">128 reviews</a>
+                    <div class="price-block" style="margin-bottom: 24px;">
+                        <div class="price-main" id="displayPrice" style="font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700;">₹@Model.Price.ToString("N0")</div>
                     </div>
 
-                    <div class="price-block">
-                        <div class="price-main" id="displayPrice"><sup>₹</sup>@Model.Price.ToString("N0")</div>
-                        <div class="price-note">Inclusive of all taxes &nbsp;·&nbsp; EMI available from ₹@((Model.Price / 12).ToString("N0"))/mo</div>
+                    <div class="selector-block" id="sizeSelector" style="display:none; margin-bottom: 20px;">
+                        <div class="selector-label" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;">SIZE <span class="selected-val" id="selectedSizeLabel"></span></div>
+                        <div class="size-options" id="dynamicSizeOptions" style="display: flex; gap: 8px;"></div>
                     </div>
 
-                    <div class="desc-block">
-                        <div class="desc-label">About this product</div>
-                        <p class="desc-text">
-                            @if (!string.IsNullOrEmpty(Model.Description))
-                            {
-                                @Model.Description
-                            }
-                            else
-                            {
-
-                                <text>High-quality product crafted with premium materials. Designed to deliver exceptional performance and style for everyday use.</text>
-                            }
-                        </p>
-                    </div>
-
-                    <div class="selector-block" id="sizeSelector" style="display:none;">
-                        <div class="selector-label">Size <span class="selected-val" id="selectedSizeLabel"></span></div>
-                        <div class="size-options" id="dynamicSizeOptions"></div>
-                    </div>
-
-                    <div class="selector-block" id="colorSelector" style="display:none;">
-                        <div class="selector-label">Color <span class="selected-val" id="selectedColorLabel"></span></div>
-                        <div class="color-options" id="dynamicColorOptions"></div>
+                    <div class="selector-block" id="colorSelector" style="display:none; margin-bottom: 24px;">
+                        <div class="selector-label" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;">FINISH <span class="selected-val" id="selectedColorLabel"></span></div>
+                        <div class="color-options" id="dynamicColorOptions" style="display: flex; gap: 8px;"></div>
                     </div>
 
                     @if (Model.StockQuantity > 0)
                     {
-                        <div class="qty-block">
-                            <div class="selector-label">Quantity</div>
-                            <div class="qty-row">
+                        <div class="qty-block" style="margin-bottom: 24px;">
+                            <div class="selector-label" style="font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;">QUANTITY</div>
+                            <div class="qty-row" style="display: flex; align-items: center; gap: 10px;">
                                 <button type="button" class="qty-btn" onclick="decreaseQty()">−</button>
                                 <input type="number" id="quantityInput" value="1" min="1" max="@Model.StockQuantity" class="qty-val" readonly>
                                 <button type="button" class="qty-btn" onclick="increaseQty()">+</button>
-                                <span class="stock-tag @(Model.StockQuantity < 10 ? "low" : "")" id="stockTag">
-                                    <i class="fas fa-box"></i>
-                                    <span id="stockText">@Model.StockQuantity left</span>
-                                </span>
                             </div>
                         </div>
 
-                        <div class="actions-block">
+                        <div class="actions-block" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
                             @if (User.IsInRole("User"))
                             {
-                                <!-- ✅ FIX: Buy Now posts to Cart/BuyNow (POST), NOT Cart/Checkout (GET) -->
-                                <form asp-controller="Cart" asp-action="BuyNow" method="post" class="m-0">
-                                    <input type="hidden" name="productId" value="@Model.ProductId" />
-                                    <input type="hidden" name="sizeId" id="buyNowSizeInput" value="" />
-                                    <input type="hidden" name="colorId" id="buyNowColorInput" value="" />
-                                    <input type="hidden" name="quantity" id="buyNowQtyInput" value="1" />
-                                    <button type="submit" class="btn-buy-now" id="buyNowBtn">
-                                        <i class="fas fa-bolt"></i> Buy Now
-                                    </button>
-                                </form>
-                                <!-- Add to Cart -->
+                                <!-- Add to Cart as ADD TO BAG -->
                                 <form asp-controller="Cart" asp-action="AddToCart" method="post" class="m-0">
                                     <input type="hidden" name="productId" value="@Model.ProductId" />
                                     <input type="hidden" name="sizeId" id="cartSizeInput" value="" />
                                     <input type="hidden" name="colorId" id="cartColorInput" value="" />
                                     <input type="hidden" name="quantity" id="cartQtyInput" value="1" />
                                     <button type="submit" class="btn-cart-add" id="cartBtn">
-                                        <i class="fas fa-bag-shopping"></i> Add to Cart
+                                        ADD TO BAG
                                     </button>
                                 </form>
-                                <!-- Wishlist -->
+                                <!-- Wishlist as ADD TO WISHLIST -->
                                 <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post" class="m-0">
                                     <input type="hidden" name="productId" value="@Model.ProductId" />
                                     <button type="submit" class="btn-wishlist-add">
-                                        <i class="fas fa-heart"></i> Save to Wishlist
+                                        <i class="far fa-heart" style="margin-right: 6px;"></i> ADD TO WISHLIST
                                     </button>
                                 </form>
                             }
                             else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                             {
-                                <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@Model.ProductId" class="btn-buy-now">
-                                    <i class="fas fa-edit"></i> Edit Product (Admin)
+                                <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@Model.ProductId" class="btn-cart-add" style="background:#0f2c59; color:white; text-align:center;">
+                                    EDIT PRODUCT (ADMIN)
                                 </a>
                             }
                             else
                             {
-                                <a asp-controller="Account" asp-action="Login" class="btn-buy-now">
-                                    <i class="fas fa-sign-in-alt"></i> Login to Purchase
+                                <a asp-controller="Account" asp-action="Login" class="btn-cart-add" style="background:#0f2c59; color:white; text-align:center;">
+                                    LOGIN TO PURCHASE
                                 </a>
-                                <a asp-controller="Account" asp-action="Register" class="btn-cart-add">
-                                    <i class="fas fa-user-plus"></i> Create Account
+                                <a asp-controller="Account" asp-action="Register" class="btn-wishlist-add" style="text-align:center;">
+                                    CREATE ACCOUNT
                                 </a>
                             }
                         </div>
                     }
                     else
                     {
-                        <div class="oos-notice">
-                            <i class="fas fa-exclamation-circle"></i>
-                            <div>
-                                <strong>Out of Stock</strong><br>
-                                <span style="font-weight:400; font-size:13px;">This item is currently unavailable. Check back soon.</span>
-                            </div>
+                        <div class="oos-notice" style="background: #f8f9fa; border: 1px solid rgba(0,0,0,0.08); border-radius: 4px; padding: 16px; margin-bottom: 24px;">
+                            <strong style="text-transform: uppercase;">Sold Out</strong><br>
+                            <span style="font-size: 13px; color: var(--ink-muted);">This item is currently unavailable.</span>
                         </div>
                     }
-                </div>
-            </div>
-        </div>
 
-        <!-- REVIEWS -->
-        <div class="reviews-card" id="reviews">
-            <div class="reviews-head">
-                <h2 class="reviews-head-title">Customer Reviews</h2>
-                <span class="reviews-count-pill">128 reviews</span>
-            </div>
-            <div class="rating-stats-row">
-                <div class="big-score">
-                    <div class="big-score-num">4.5</div>
-                    <div class="big-score-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
+                    <!-- Accordion Section -->
+                    <div class="detail-accordion">
+                        <div class="accordion-item-custom">
+                            <button class="accordion-btn-custom" onclick="toggleAccordion(this)">
+                                Product Specifications <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="accordion-panel-custom">
+                                <div class="accordion-content-custom">
+                                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                                        <li><strong>PRODUCT TITLE:</strong> @Model.Name</li>
+                                        <li><strong>CATEGORIES:</strong> @Model.Category.Name</li>
+                                        <li><strong>SIZES:</strong> 16 Inch, 18 Inch</li>
+                                        <li><strong>MATERIAL:</strong> 18K Yellow Gold | 925 Sterling Silver</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item-custom">
+                            <button class="accordion-btn-custom" onclick="toggleAccordion(this)">
+                                Care Instructions <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="accordion-panel-custom">
+                                <div class="accordion-content-custom">
+                                    <ul style="padding-left: 20px; margin: 0; display: flex; flex-direction: column; gap: 6px;">
+                                        <li>Use clean microfiber cloth for polishing.</li>
+                                        <li>Avoid contact with cosmetics, perfumes, and water cleaning materials.</li>
+                                        <li>Keep in an airtight box to protect from tarnish.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item-custom">
+                            <button class="accordion-btn-custom" onclick="toggleAccordion(this)">
+                                Customer Reviews <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="accordion-panel-custom">
+                                <div class="accordion-content-custom">
+                                    <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 10px;">
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <span style="font-size: 24px; font-weight: 700;">4.5</span>
+                                            <div style="color: #f5a623;">
+                                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                            <span style="font-size: 13px; color: var(--ink-muted);">Based on 128 reviews</span>
+                                        </div>
+                                        <div class="review-item" style="border-top: 1px solid rgba(0,0,0,0.06); padding-top: 12px; margin: 0;">
+                                            <div style="display:flex; justify-content:space-between; align-items:center;">
+                                                <strong>Aman Kumar</strong>
+                                                <span style="font-size:12px; color:var(--ink-muted);">Jan 5, 2026</span>
+                                            </div>
+                                            <div style="color: #f5a623; font-size:11px; margin: 3px 0;"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                                            <p style="font-size:13px; margin:0; line-height:1.5;">Outstanding quality! Elegant celestial detail, looks extremely classy.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="big-score-label">out of 5</div>
-                </div>
-                <div class="bars-col">
-                    <div class="bar-row"><span class="bar-num">5 stars</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-count">96</span></div>
-                    <div class="bar-row"><span class="bar-num">4 stars</span><div class="bar-track"><div class="bar-fill" style="width:15%"></div></div><span class="bar-count">19</span></div>
-                    <div class="bar-row"><span class="bar-num">3 stars</span><div class="bar-track"><div class="bar-fill" style="width:5%"></div></div><span class="bar-count">6</span></div>
-                    <div class="bar-row"><span class="bar-num">2 stars</span><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><span class="bar-count">4</span></div>
-                    <div class="bar-row"><span class="bar-num">1 star</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span class="bar-count">3</span></div>
-                </div>
-            </div>
-            <div class="reviews-list">
-                <div class="review-item">
-                    <div class="review-top">
-                        <div class="reviewer"><div class="reviewer-av">AK</div><div><div class="reviewer-name">Aman Kumar</div><div class="reviewer-date">January 5, 2026</div></div></div>
-                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    </div>
-                    <p class="review-body">Excellent product! The quality is outstanding and it arrived exactly as described. Highly recommend to anyone looking for great value. Fast shipping and well packaged too.</p>
-                    <span class="verified-tag"><i class="fas fa-check-circle"></i> Verified Purchase</span>
-                </div>
-                <div class="review-item">
-                    <div class="review-top">
-                        <div class="reviewer"><div class="reviewer-av alt1">PS</div><div><div class="reviewer-name">Priya Sharma</div><div class="reviewer-date">January 3, 2026</div></div></div>
-                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
-                    </div>
-                    <p class="review-body">Good product overall. The quality is really nice but delivery took slightly longer than expected. Still very happy with my purchase and would buy again from this store.</p>
-                    <span class="verified-tag"><i class="fas fa-check-circle"></i> Verified Purchase</span>
-                </div>
-                <div class="review-item">
-                    <div class="review-top">
-                        <div class="reviewer"><div class="reviewer-av alt2">RV</div><div><div class="reviewer-name">Rahul Verma</div><div class="reviewer-date">December 28, 2025</div></div></div>
-                        <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    </div>
-                    <p class="review-body">Amazing quality and exceptional customer service! This exceeded my expectations completely. The attention to detail is impressive and it looks even better in person.</p>
-                    <span class="verified-tag"><i class="fas fa-check-circle"></i> Verified Purchase</span>
                 </div>
             </div>
         </div>
@@ -1255,6 +1230,15 @@
         const productId = @Model.ProductId;
         const basePrice = @Model.Price;
 
+        function toggleAccordion(btn) {
+            btn.classList.toggle('active');
+            const panel = btn.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
         function decreaseQty() {
             const inp = document.getElementById('quantityInput');
             if (+inp.value > 1) { inp.value = +inp.value - 1; syncQty(inp.value); }
@@ -1272,7 +1256,7 @@
             el.classList.add('active');
         }
         function selectSize(el, sizeId, sizeName) {
-            document.querySelectorAll('.size-chip').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('#sizeSelector .size-chip').forEach(c => c.classList.remove('active'));
             el.classList.add('active'); selectedSize = sizeId;
             const lbl = document.getElementById('selectedSizeLabel'); if (lbl) lbl.textContent = '— ' + sizeName;
             syncSizeInputs(sizeId); checkVariant();
@@ -1281,7 +1265,7 @@
             ['buyNowSizeInput','cartSizeInput'].forEach(id => { const el = document.getElementById(id); if (el) el.value = v || ''; });
         }
         function selectColor(el, colorId, colorName) {
-            document.querySelectorAll('.color-dot').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('#colorSelector .size-chip').forEach(c => c.classList.remove('active'));
             el.classList.add('active'); selectedColor = colorId;
             const lbl = document.getElementById('selectedColorLabel'); if (lbl) lbl.textContent = '— ' + colorName;
             syncColorInputs(colorId); checkVariant();
@@ -1303,8 +1287,8 @@
                 }
                 if (colors.length > 0) {
                     document.getElementById('dynamicColorOptions').innerHTML = colors.map((c, i) =>
-                        `<div class="color-dot ${i===0?'active':''}" style="background:${c.colorCode}" title="${c.colorName}"
-                             onclick="selectColor(this,${c.colorId},'${c.colorName}')"></div>`
+                        `<div class="size-chip text-uppercase ${i===0?'active':''}"
+                             onclick="selectColor(this,${c.colorId},'${c.colorName}')">${c.colorName}</div>`
                     ).join('');
                     document.getElementById('colorSelector').style.display = 'block';
                     if (colors[0]) { selectedColor = colors[0].colorId; syncColorInputs(selectedColor); }
@@ -1319,24 +1303,18 @@
                 const data = await res.json();
                 const buyBtn = document.getElementById('buyNowBtn');
                 const cartBtn = document.getElementById('cartBtn');
-                const stockText = document.getElementById('stockText');
-                const stockTag = document.getElementById('stockTag');
                 const priceEl = document.getElementById('displayPrice');
                 const qtyInput = document.getElementById('quantityInput');
                 if (data.isAvailable && data.stockQuantity > 0) {
                     currentMaxStock = data.stockQuantity;
                     if (buyBtn) { buyBtn.disabled = false; buyBtn.style.opacity = '1'; }
                     if (cartBtn) { cartBtn.disabled = false; cartBtn.style.opacity = '1'; }
-                    if (stockText) stockText.textContent = data.stockQuantity + ' left';
-                    if (stockTag) stockTag.className = 'stock-tag' + (data.stockQuantity < 10 ? ' low' : '');
-                    if (data.price > 0 && priceEl) priceEl.innerHTML = '<sup>₹</sup>' + Math.round(data.price).toLocaleString('en-IN');
+                    if (data.price > 0 && priceEl) priceEl.innerHTML = '₹' + Math.round(data.price).toLocaleString('en-IN');
                     if (qtyInput) { qtyInput.max = data.stockQuantity; if (+qtyInput.value > data.stockQuantity) { qtyInput.value = data.stockQuantity; syncQty(data.stockQuantity); } }
                 } else {
                     currentMaxStock = 0;
                     if (buyBtn) { buyBtn.disabled = true; buyBtn.style.opacity = '0.4'; }
                     if (cartBtn) { cartBtn.disabled = true; cartBtn.style.opacity = '0.4'; }
-                    if (stockText) stockText.textContent = 'Out of stock';
-                    if (stockTag) stockTag.className = 'stock-tag none';
                 }
             } catch(e) { console.error('Variant check error:', e); }
         }

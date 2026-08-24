@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\source\\repos\\BrandsStore\\BrandsStore.csproj": {}
+    "C:\\Users\\Admin\\source\\repos\\Aqsa-Collection\\BrandsStore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\source\\repos\\BrandsStore\\BrandsStore.csproj": {
+    "C:\\Users\\Admin\\source\\repos\\Aqsa-Collection\\BrandsStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\BrandsStore\\BrandsStore.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Aqsa-Collection\\BrandsStore.csproj",
         "projectName": "BrandsStore",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\BrandsStore\\BrandsStore.csproj",
+        "projectPath": "C:\\Users\\Admin\\source\\repos\\Aqsa-Collection\\BrandsStore.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\BrandsStore\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\source\\repos\\Aqsa-Collection\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -57,15 +57,7 @@
             },
             "MailKit": {
               "target": "Package",
-              "version": "[4.14.1, )"
-            },
-            "Microsoft.AspNetCore.Authentication.Cookies": {
-              "target": "Package",
-              "version": "[2.3.0, )"
-            },
-            "Microsoft.AspNetCore.Http": {
-              "target": "Package",
-              "version": "[2.3.0, )"
+              "version": "[4.17.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -83,7 +75,7 @@
             },
             "MimeKit": {
               "target": "Package",
-              "version": "[4.14.0, )"
+              "version": "[4.17.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

@@ -1,4 +1,4 @@
-﻿using BrandsStore.Models;
+using BrandsStore.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BrandsStore.Data
@@ -179,75 +179,63 @@ namespace BrandsStore.Data
             // SEED DATA - CATEGORIES
             // ================================================
             modelBuilder.Entity<Category>().HasData(
-                new Category { CategoryId = 1, Name = "Electronics", Description = "Electronic devices, gadgets, laptops, phones, and accessories", IsActive = true },
-                new Category { CategoryId = 2, Name = "Clothing", Description = "Fashion apparel, casual wear, and clothing items", IsActive = true },
-                new Category { CategoryId = 3, Name = "Books", Description = "Books, novels, textbooks, and publications", IsActive = true },
-                new Category { CategoryId = 4, Name = "Home & Kitchen", Description = "Home appliances, kitchen items, and household goods", IsActive = true },
-                new Category { CategoryId = 5, Name = "Shoes", Description = "Footwear including sneakers, formal shoes, boots, and sandals", IsActive = true },
-                new Category { CategoryId = 6, Name = "Shirts", Description = "Casual shirts, formal shirts, t-shirts, and tops", IsActive = true },
-                new Category { CategoryId = 7, Name = "Pants", Description = "Jeans, trousers, casual pants, and formal wear", IsActive = true },
-                new Category { CategoryId = 8, Name = "Accessories", Description = "Watches, belts, bags, wallets, and fashion accessories", IsActive = true },
-                new Category { CategoryId = 9, Name = "Sports & Fitness", Description = "Sports equipment, gym wear, and fitness accessories", IsActive = true },
-                new Category { CategoryId = 10, Name = "Jewelry", Description = "Rings, necklaces, bracelets, and fashion jewelry", IsActive = true }
+                new Category { CategoryId = 1, Name = "Jewelry", Description = "Elegant jewelry, including necklaces, rings, earrings, and bracelets", IsActive = true },
+                new Category { CategoryId = 2, Name = "Accessories", Description = "Premium accessories, bags, watches, and style items", IsActive = true }
             );
 
             // ================================================
             // SEED DATA - SIZES
             // ================================================
-            // Clothing (Cat 2)
+            // Jewelry (Cat 1)
             modelBuilder.Entity<Size>().HasData(
-                new Size { SizeId = 1, CategoryId = 2, SizeName = "XS", SizeOrder = 1, IsActive = true },
-                new Size { SizeId = 2, CategoryId = 2, SizeName = "S", SizeOrder = 2, IsActive = true },
-                new Size { SizeId = 3, CategoryId = 2, SizeName = "M", SizeOrder = 3, IsActive = true },
-                new Size { SizeId = 4, CategoryId = 2, SizeName = "L", SizeOrder = 4, IsActive = true },
-                new Size { SizeId = 5, CategoryId = 2, SizeName = "XL", SizeOrder = 5, IsActive = true },
-                new Size { SizeId = 6, CategoryId = 2, SizeName = "XXL", SizeOrder = 6, IsActive = true }
+                new Size { SizeId = 1, CategoryId = 1, SizeName = "16 Inch", SizeOrder = 1, IsActive = true },
+                new Size { SizeId = 2, CategoryId = 1, SizeName = "18 Inch", SizeOrder = 2, IsActive = true },
+                new Size { SizeId = 3, CategoryId = 1, SizeName = "6", SizeOrder = 3, IsActive = true },
+                new Size { SizeId = 4, CategoryId = 1, SizeName = "7", SizeOrder = 4, IsActive = true },
+                new Size { SizeId = 5, CategoryId = 1, SizeName = "8", SizeOrder = 5, IsActive = true }
             );
-            // Shoes (Cat 5)
+            // Accessories (Cat 2)
             modelBuilder.Entity<Size>().HasData(
-                new Size { SizeId = 7, CategoryId = 5, SizeName = "7", SizeOrder = 1, IsActive = true },
-                new Size { SizeId = 8, CategoryId = 5, SizeName = "8", SizeOrder = 2, IsActive = true },
-                new Size { SizeId = 9, CategoryId = 5, SizeName = "9", SizeOrder = 3, IsActive = true },
-                new Size { SizeId = 10, CategoryId = 5, SizeName = "10", SizeOrder = 4, IsActive = true },
-                new Size { SizeId = 11, CategoryId = 5, SizeName = "11", SizeOrder = 5, IsActive = true }
-            );
-            // Shirts (Cat 6)
-            modelBuilder.Entity<Size>().HasData(
-                new Size { SizeId = 12, CategoryId = 6, SizeName = "S", SizeOrder = 1, IsActive = true },
-                new Size { SizeId = 13, CategoryId = 6, SizeName = "M", SizeOrder = 2, IsActive = true },
-                new Size { SizeId = 14, CategoryId = 6, SizeName = "L", SizeOrder = 3, IsActive = true },
-                new Size { SizeId = 15, CategoryId = 6, SizeName = "XL", SizeOrder = 4, IsActive = true }
+                new Size { SizeId = 6, CategoryId = 2, SizeName = "One Size", SizeOrder = 1, IsActive = true }
             );
 
             // ================================================
             // SEED DATA - COLORS
             // ================================================
-            // Electronics (Cat 1)
+            // Jewelry (Cat 1)
             modelBuilder.Entity<Color>().HasData(
-                new Color { ColorId = 1, CategoryId = 1, ColorName = "Black", ColorCode = "#000000", IsActive = true },
-                new Color { ColorId = 2, CategoryId = 1, ColorName = "White", ColorCode = "#FFFFFF", IsActive = true },
-                new Color { ColorId = 3, CategoryId = 1, ColorName = "Silver", ColorCode = "#C0C0C0", IsActive = true }
+                new Color { ColorId = 1, CategoryId = 1, ColorName = "Yellow Gold", ColorCode = "#E6C229", IsActive = true },
+                new Color { ColorId = 2, CategoryId = 1, ColorName = "Rose Gold", ColorCode = "#B76E79", IsActive = true },
+                new Color { ColorId = 3, CategoryId = 1, ColorName = "Sterling Silver", ColorCode = "#C0C0C0", IsActive = true }
             );
-            // Clothing (Cat 2)
+            // Accessories (Cat 2)
             modelBuilder.Entity<Color>().HasData(
                 new Color { ColorId = 4, CategoryId = 2, ColorName = "Black", ColorCode = "#000000", IsActive = true },
-                new Color { ColorId = 5, CategoryId = 2, ColorName = "White", ColorCode = "#FFFFFF", IsActive = true },
-                new Color { ColorId = 6, CategoryId = 2, ColorName = "Red", ColorCode = "#DC2626", IsActive = true },
-                new Color { ColorId = 7, CategoryId = 2, ColorName = "Blue", ColorCode = "#3B82F6", IsActive = true },
-                new Color { ColorId = 8, CategoryId = 2, ColorName = "Green", ColorCode = "#10B981", IsActive = true }
+                new Color { ColorId = 5, CategoryId = 2, ColorName = "Gold", ColorCode = "#FFD700", IsActive = true }
             );
-            // Shoes (Cat 5)
-            modelBuilder.Entity<Color>().HasData(
-                new Color { ColorId = 9, CategoryId = 5, ColorName = "Black", ColorCode = "#000000", IsActive = true },
-                new Color { ColorId = 10, CategoryId = 5, ColorName = "White", ColorCode = "#FFFFFF", IsActive = true },
-                new Color { ColorId = 11, CategoryId = 5, ColorName = "Brown", ColorCode = "#92400E", IsActive = true }
+
+            // ================================================
+            // SEED DATA - PRODUCTS
+            // ================================================
+            modelBuilder.Entity<Product>().HasData(
+                new Product { ProductId = 1, Name = "Diamond Stud Earrings", SKU = "EARS001", Description = "Round brilliant cut diamond stud earrings, set in elegant gold.", CategoryId = 1, Price = 45000.00m, StockQuantity = 12, ImageUrl = "https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&w=400", IsActive = true, CreatedDate = DateTime.Now },
+                new Product { ProductId = 2, Name = "Diamond Stud Earrings", SKU = "EARS002", Description = "Brilliant cut diamond studs with a sparkling outer halo design.", CategoryId = 1, Price = 45000.00m, StockQuantity = 15, ImageUrl = "https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&w=400", IsActive = true, CreatedDate = DateTime.Now },
+                new Product { ProductId = 3, Name = "Diamond Stud Earrings", SKU = "EARS003", Description = "Delicate dangle earrings with circle diamond cluster links.", CategoryId = 1, Price = 45000.00m, StockQuantity = 10, ImageUrl = "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=400", IsActive = true, CreatedDate = DateTime.Now },
+                new Product { ProductId = 4, Name = "Diamond Stud Earrings", SKU = "EARS004", Description = "Timeless hoop earrings featuring rows of brilliant diamonds.", CategoryId = 1, Price = 45000.00m, StockQuantity = 8, ImageUrl = "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?q=80&w=400", IsActive = true, CreatedDate = DateTime.Now },
+                new Product { ProductId = 5, Name = "Diamond Stud Earrings", SKU = "EARS005", Description = "Thick gold hoop earrings, highly polished and sparkling.", CategoryId = 1, Price = 89000.00m, StockQuantity = 6, ImageUrl = "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400", IsActive = true, CreatedDate = DateTime.Now },
+                new Product { ProductId = 6, Name = "Diamond Stud Earrings", SKU = "RNG001", Description = "Stunning cushion-cut diamond engagement ring in yellow gold.", CategoryId = 1, Price = 73000.00m, StockQuantity = 14, ImageUrl = "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=400", IsActive = true, CreatedDate = DateTime.Now },
+                new Product { ProductId = 7, Name = "Diamond Stud Earrings", SKU = "EARS007", Description = "Geometric square dangle diamond earrings in sterling silver.", CategoryId = 1, Price = 28000.00m, StockQuantity = 9, ImageUrl = "https://images.unsplash.com/photo-1617038221804-03f9b2d69970?q=80&w=400", IsActive = true, CreatedDate = DateTime.Now },
+                new Product { ProductId = 8, Name = "Eternity Ring", SKU = "RNG002", Description = "A full eternity band set with brilliant pavé diamonds.", CategoryId = 1, Price = 30000.00m, StockQuantity = 11, ImageUrl = "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?q=80&w=400", IsActive = true, CreatedDate = DateTime.Now }
             );
-            // Shirts (Cat 6)
-            modelBuilder.Entity<Color>().HasData(
-                new Color { ColorId = 12, CategoryId = 6, ColorName = "White", ColorCode = "#FFFFFF", IsActive = true },
-                new Color { ColorId = 13, CategoryId = 6, ColorName = "Black", ColorCode = "#000000", IsActive = true },
-                new Color { ColorId = 14, CategoryId = 6, ColorName = "Blue", ColorCode = "#3B82F6", IsActive = true },
-                new Color { ColorId = 15, CategoryId = 6, ColorName = "Gray", ColorCode = "#6B7280", IsActive = true }
+
+            // ================================================
+            // SEED DATA - VARIANTS
+            // ================================================
+            modelBuilder.Entity<ProductVariant>().HasData(
+                new ProductVariant { VariantId = 1, ProductId = 1, SizeId = 1, ColorId = 1, StockQuantity = 5, Price = 45000.00m, SKU = "EARS001-16-YG", IsActive = true, CreatedAt = DateTime.Now },
+                new ProductVariant { VariantId = 2, ProductId = 1, SizeId = 1, ColorId = 2, StockQuantity = 5, Price = 45000.00m, SKU = "EARS001-16-RG", IsActive = true, CreatedAt = DateTime.Now },
+                new ProductVariant { VariantId = 3, ProductId = 1, SizeId = 2, ColorId = 1, StockQuantity = 5, Price = 45000.00m, SKU = "EARS001-18-YG", IsActive = true, CreatedAt = DateTime.Now },
+                new ProductVariant { VariantId = 4, ProductId = 1, SizeId = 2, ColorId = 2, StockQuantity = 5, Price = 45000.00m, SKU = "EARS001-18-RG", IsActive = true, CreatedAt = DateTime.Now }
             );
         }
     }

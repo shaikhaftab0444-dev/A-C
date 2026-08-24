@@ -80,31 +80,111 @@ namespace BrandsStore.Migrations
                         new
                         {
                             CategoryId = 1,
-                            Description = "Electronic devices and gadgets",
+                            Description = "Elegant jewelry, including necklaces, rings, earrings, and bracelets",
                             IsActive = true,
-                            Name = "Electronics"
+                            Name = "Jewelry"
                         },
                         new
                         {
                             CategoryId = 2,
-                            Description = "Fashion and apparel",
+                            Description = "Premium accessories, bags, watches, and style items",
                             IsActive = true,
-                            Name = "Clothing"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            Description = "Books and publications",
-                            IsActive = true,
-                            Name = "Books"
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            Description = "Home appliances and kitchen items",
-                            IsActive = true,
-                            Name = "Home & Kitchen"
+                            Name = "Accessories"
                         });
+                });
+
+            modelBuilder.Entity("BrandsStore.Models.Offer", b =>
+                {
+                    b.Property<int>("OfferId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OfferId"));
+
+                    b.Property<string>("AccentColor")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasDefaultValue("#e8365d");
+
+                    b.Property<string>("BackgroundImageUrl")
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
+
+                    b.Property<string>("BadgeText")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("EyebrowText")
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Pill1Subtitle")
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("Pill1Title")
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("Pill2Subtitle")
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("Pill2Title")
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("PrimaryButtonText")
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("PrimaryButtonUrl")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("SecondaryButtonText")
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("SecondaryButtonUrl")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Subtitle")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("OfferId");
+
+                    b.ToTable("Offers");
                 });
 
             modelBuilder.Entity("BrandsStore.Models.Order", b =>
@@ -190,12 +270,10 @@ namespace BrandsStore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -210,6 +288,11 @@ namespace BrandsStore.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("SKU")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
@@ -218,6 +301,192 @@ namespace BrandsStore.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3180),
+                            Description = "Round brilliant cut diamond stud earrings, set in elegant gold.",
+                            ImageUrl = "https://images.unsplash.com/photo-1635767798638-3e25273a8236?q=80&w=400",
+                            IsActive = true,
+                            Name = "Diamond Stud Earrings",
+                            Price = 45000.00m,
+                            SKU = "EARS001",
+                            StockQuantity = 12
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3184),
+                            Description = "Brilliant cut diamond studs with a sparkling outer halo design.",
+                            ImageUrl = "https://images.unsplash.com/photo-1630019852942-f89202989a59?q=80&w=400",
+                            IsActive = true,
+                            Name = "Diamond Stud Earrings",
+                            Price = 45000.00m,
+                            SKU = "EARS002",
+                            StockQuantity = 15
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3187),
+                            Description = "Delicate dangle earrings with circle diamond cluster links.",
+                            ImageUrl = "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?q=80&w=400",
+                            IsActive = true,
+                            Name = "Diamond Stud Earrings",
+                            Price = 45000.00m,
+                            SKU = "EARS003",
+                            StockQuantity = 10
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3190),
+                            Description = "Timeless hoop earrings featuring rows of brilliant diamonds.",
+                            ImageUrl = "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?q=80&w=400",
+                            IsActive = true,
+                            Name = "Diamond Stud Earrings",
+                            Price = 45000.00m,
+                            SKU = "EARS004",
+                            StockQuantity = 8
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3193),
+                            Description = "Thick gold hoop earrings, highly polished and sparkling.",
+                            ImageUrl = "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=400",
+                            IsActive = true,
+                            Name = "Diamond Stud Earrings",
+                            Price = 89000.00m,
+                            SKU = "EARS005",
+                            StockQuantity = 6
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3196),
+                            Description = "Stunning cushion-cut diamond engagement ring in yellow gold.",
+                            ImageUrl = "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=400",
+                            IsActive = true,
+                            Name = "Diamond Stud Earrings",
+                            Price = 73000.00m,
+                            SKU = "RNG001",
+                            StockQuantity = 14
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3198),
+                            Description = "Geometric square dangle diamond earrings in sterling silver.",
+                            ImageUrl = "https://images.unsplash.com/photo-1617038221804-03f9b2d69970?q=80&w=400",
+                            IsActive = true,
+                            Name = "Diamond Stud Earrings",
+                            Price = 28000.00m,
+                            SKU = "EARS007",
+                            StockQuantity = 9
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            CategoryId = 1,
+                            CreatedDate = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3201),
+                            Description = "A full eternity band set with brilliant pavé diamonds.",
+                            ImageUrl = "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?q=80&w=400",
+                            IsActive = true,
+                            Name = "Eternity Ring",
+                            Price = 30000.00m,
+                            SKU = "RNG002",
+                            StockQuantity = 11
+                        });
+                });
+
+            modelBuilder.Entity("BrandsStore.Models.Size", b =>
+                {
+                    b.Property<int>("SizeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SizeId"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SizeName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("SizeOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("SizeId");
+
+                    b.HasIndex("CategoryId")
+                        .HasDatabaseName("IX_Sizes_CategoryId");
+
+                    b.ToTable("Sizes");
+
+                    b.HasData(
+                        new
+                        {
+                            SizeId = 1,
+                            CategoryId = 1,
+                            IsActive = true,
+                            SizeName = "16 Inch",
+                            SizeOrder = 1
+                        },
+                        new
+                        {
+                            SizeId = 2,
+                            CategoryId = 1,
+                            IsActive = true,
+                            SizeName = "18 Inch",
+                            SizeOrder = 2
+                        },
+                        new
+                        {
+                            SizeId = 3,
+                            CategoryId = 1,
+                            IsActive = true,
+                            SizeName = "6",
+                            SizeOrder = 3
+                        },
+                        new
+                        {
+                            SizeId = 4,
+                            CategoryId = 1,
+                            IsActive = true,
+                            SizeName = "7",
+                            SizeOrder = 4
+                        },
+                        new
+                        {
+                            SizeId = 5,
+                            CategoryId = 1,
+                            IsActive = true,
+                            SizeName = "8",
+                            SizeOrder = 5
+                        },
+                        new
+                        {
+                            SizeId = 6,
+                            CategoryId = 2,
+                            IsActive = true,
+                            SizeName = "One Size",
+                            SizeOrder = 1
+                        });
                 });
 
             modelBuilder.Entity("BrandsStore.Models.User", b =>
@@ -280,12 +549,12 @@ namespace BrandsStore.Migrations
                         new
                         {
                             UserId = 1,
-                            CreatedDate = new DateTime(2026, 1, 3, 23, 34, 29, 833, DateTimeKind.Local).AddTicks(1540),
+                            CreatedDate = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(2709),
                             Email = "admin@brandsstore.com",
                             FullName = "Admin User",
                             IsActive = true,
                             OtpAttemptCount = 0,
-                            Password = "bP7YWvLCZQbJT2nKxQF0Dw==:qO9vEYH9nz4W3pJQQlXGzQ==",
+                            Password = "Admin@123",
                             Role = "Admin"
                         });
                 });
@@ -315,6 +584,177 @@ namespace BrandsStore.Migrations
                         .IsUnique();
 
                     b.ToTable("Wishlists");
+                });
+
+            modelBuilder.Entity("Color", b =>
+                {
+                    b.Property<int>("ColorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ColorId"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ColorCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("ColorName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ColorId");
+
+                    b.HasIndex("CategoryId")
+                        .HasDatabaseName("IX_Colors_CategoryId");
+
+                    b.ToTable("Colors");
+
+                    b.HasData(
+                        new
+                        {
+                            ColorId = 1,
+                            CategoryId = 1,
+                            ColorCode = "#E6C229",
+                            ColorName = "Yellow Gold",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            ColorId = 2,
+                            CategoryId = 1,
+                            ColorCode = "#B76E79",
+                            ColorName = "Rose Gold",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            ColorId = 3,
+                            CategoryId = 1,
+                            ColorCode = "#C0C0C0",
+                            ColorName = "Sterling Silver",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            ColorId = 4,
+                            CategoryId = 2,
+                            ColorCode = "#000000",
+                            ColorName = "Black",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            ColorId = 5,
+                            CategoryId = 2,
+                            ColorCode = "#FFD700",
+                            ColorName = "Gold",
+                            IsActive = true
+                        });
+                });
+
+            modelBuilder.Entity("ProductVariant", b =>
+                {
+                    b.Property<int>("VariantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VariantId"));
+
+                    b.Property<int?>("ColorId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SKU")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("SizeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("VariantId");
+
+                    b.HasIndex("ColorId")
+                        .HasDatabaseName("IX_ProductVariants_ColorId");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("IX_ProductVariants_ProductId");
+
+                    b.HasIndex("SizeId")
+                        .HasDatabaseName("IX_ProductVariants_SizeId");
+
+                    b.ToTable("ProductVariants");
+
+                    b.HasData(
+                        new
+                        {
+                            VariantId = 1,
+                            ColorId = 1,
+                            CreatedAt = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3235),
+                            IsActive = true,
+                            Price = 45000.00m,
+                            ProductId = 1,
+                            SKU = "EARS001-16-YG",
+                            SizeId = 1,
+                            StockQuantity = 5
+                        },
+                        new
+                        {
+                            VariantId = 2,
+                            ColorId = 2,
+                            CreatedAt = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3239),
+                            IsActive = true,
+                            Price = 45000.00m,
+                            ProductId = 1,
+                            SKU = "EARS001-16-RG",
+                            SizeId = 1,
+                            StockQuantity = 5
+                        },
+                        new
+                        {
+                            VariantId = 3,
+                            ColorId = 1,
+                            CreatedAt = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3242),
+                            IsActive = true,
+                            Price = 45000.00m,
+                            ProductId = 1,
+                            SKU = "EARS001-18-YG",
+                            SizeId = 2,
+                            StockQuantity = 5
+                        },
+                        new
+                        {
+                            VariantId = 4,
+                            ColorId = 2,
+                            CreatedAt = new DateTime(2026, 8, 23, 14, 22, 48, 354, DateTimeKind.Local).AddTicks(3245),
+                            IsActive = true,
+                            Price = 45000.00m,
+                            ProductId = 1,
+                            SKU = "EARS001-18-RG",
+                            SizeId = 2,
+                            StockQuantity = 5
+                        });
                 });
 
             modelBuilder.Entity("BrandsStore.Models.CartItem", b =>
@@ -375,6 +815,17 @@ namespace BrandsStore.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("BrandsStore.Models.Size", b =>
+                {
+                    b.HasOne("BrandsStore.Models.Category", "Category")
+                        .WithMany("Sizes")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("BrandsStore.Models.Wishlist", b =>
                 {
                     b.HasOne("BrandsStore.Models.Product", "Product")
@@ -394,9 +845,49 @@ namespace BrandsStore.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Color", b =>
+                {
+                    b.HasOne("BrandsStore.Models.Category", "Category")
+                        .WithMany("Colors")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ProductVariant", b =>
+                {
+                    b.HasOne("Color", "Color")
+                        .WithMany("ProductVariants")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("BrandsStore.Models.Product", "Product")
+                        .WithMany("ProductVariants")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BrandsStore.Models.Size", "Size")
+                        .WithMany("ProductVariants")
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Color");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Size");
+                });
+
             modelBuilder.Entity("BrandsStore.Models.Category", b =>
                 {
+                    b.Navigation("Colors");
+
                     b.Navigation("Products");
+
+                    b.Navigation("Sizes");
                 });
 
             modelBuilder.Entity("BrandsStore.Models.Order", b =>
@@ -409,6 +900,13 @@ namespace BrandsStore.Migrations
                     b.Navigation("CartItems");
 
                     b.Navigation("OrderDetails");
+
+                    b.Navigation("ProductVariants");
+                });
+
+            modelBuilder.Entity("BrandsStore.Models.Size", b =>
+                {
+                    b.Navigation("ProductVariants");
                 });
 
             modelBuilder.Entity("BrandsStore.Models.User", b =>
@@ -418,6 +916,11 @@ namespace BrandsStore.Migrations
                     b.Navigation("Orders");
 
                     b.Navigation("Wishlists");
+                });
+
+            modelBuilder.Entity("Color", b =>
+                {
+                    b.Navigation("ProductVariants");
                 });
 #pragma warning restore 612, 618
         }

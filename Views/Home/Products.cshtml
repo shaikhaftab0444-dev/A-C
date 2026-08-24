@@ -1,8 +1,7 @@
-﻿@model IEnumerable<BrandsStore.Models.Product>
+@model IEnumerable<BrandsStore.Models.Product>
 
 @{
     ViewData["Title"] = "Products";
-    // Resolve selected category name for display
     string selectedCatName = "";
     if (ViewBag.SelectedCategory != null && ViewBag.Categories != null)
     {
@@ -13,384 +12,1006 @@
 }
 
 <style>
-    @@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+    @@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap');
+
     :root {
-        --ink: #0a0a0f;
-        --ink-soft: #3a3a4a;
-        --ink-muted: #7a7a8c;
-        --surface: #ffffff;
-        --surface-2: #f5f5f8;
-        --surface-3: #e8e8ef;
-        --accent: #e8365d;
-        --accent-dark: #c42548;
-        --accent-glow: rgba(232, 54, 93, 0.1);
-        --gold: #c9a227;
-        --green: #00b074;
-        --radius-sm: 8px;
-        --radius-md: 16px;
-        --radius-lg: 24px;
-        --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
-        --shadow-md: 0 8px 32px rgba(0,0,0,0.1);
-        --shadow-lg: 0 20px 60px rgba(0,0,0,0.14);
-        --transition: all 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+        --ink: #12201b;
+        --ink-soft: #3f4f47;
+        --ink-muted: #7d8b83;
+        --ivory: #faf6ee;
+        --stone: #f1ebdc;
+        --stone-2: #e6dcc7;
+        --emerald: #1f4d3d;
+        --emerald-deep: #0c2620;
+        --emerald-glow: rgba(31, 77, 61, 0.14);
+        --gold: #b6872f;
+        --gold-light: #e8cd8a;
+        --gold-glow: rgba(182, 135, 47, 0.18);
+        --green-ok: #2f7a52;
+        --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+        background-color: var(--ivory);
+        color: var(--ink);
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* ===== FACET CLIP MOTIFS ===== */
+    .facet-hero {
+        clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 32px 100%, 0 calc(100% - 32px));
+    }
+
+    .facet-card {
+        clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+    }
+
+    .facet-btn {
+        clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+
+    /* Gem square accent */
+    .gem-dot {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        background: var(--gold);
+        transform: rotate(45deg);
+        flex-shrink: 0;
     }
 
     /* ===== PAGE HERO ===== */
     .products-hero {
-        background: var(--ink);
-        padding: 52px 0 44px;
+        background: var(--emerald-deep);
+        padding: 90px 0 80px;
         position: relative;
         overflow: hidden;
+        border-bottom: 3px solid var(--gold);
     }
-    .products-hero::before {
-        content: '';
-        position: absolute; inset: 0;
-        background-image:
-            radial-gradient(circle at 15% 50%, rgba(232,54,93,0.15) 0%, transparent 45%),
-            radial-gradient(circle at 85% 30%, rgba(26,86,240,0.08) 0%, transparent 45%),
-            linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-        background-size: auto, auto, 48px 48px, 48px 48px;
+
+        .products-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 80% 20%, var(--gold-glow) 0%, transparent 55%), linear-gradient(rgba(232, 205, 138, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(232, 205, 138, 0.04) 1px, transparent 1px);
+            background-size: auto, 36px 36px, 36px 36px;
+            pointer-events: none;
+        }
+
+    .hero-inner {
+        position: relative;
+        z-index: 1;
     }
-    .hero-inner { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.22em;
+        color: var(--gold-light);
+        margin-bottom: 18px;
+    }
+
     .hero-crumb {
-        display: flex; align-items: center; gap: 8px;
-        font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 16px; font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 11px;
+        color: rgba(250, 246, 238, 0.5);
+        margin-bottom: 24px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
         flex-wrap: wrap;
     }
-    .hero-crumb a { color: rgba(255,255,255,0.35); text-decoration: none; transition: var(--transition); }
-    .hero-crumb a:hover { color: rgba(255,255,255,0.7); }
-    .hero-crumb i { font-size: 8px; }
-    .hero-crumb .current { color: rgba(255,255,255,0.7); }
+
+        .hero-crumb a {
+            color: rgba(250, 246, 238, 0.6);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+            .hero-crumb a:hover {
+                color: var(--gold-light);
+            }
+
+        .hero-crumb .crumb-sep {
+            font-size: 8px;
+            color: var(--gold);
+        }
+
+        .hero-crumb .current {
+            color: var(--ivory);
+        }
+
     .products-hero h1 {
-        font-family: 'Playfair Display', serif;
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 900; color: white; line-height: 1.1; margin: 0 0 8px;
+        font-family: 'Fraunces', serif;
+        font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+        font-weight: 500;
+        color: var(--ivory);
+        line-height: 1.15;
+        margin: 0 0 14px;
+        letter-spacing: -0.01em;
     }
-    .products-hero h1 em { font-style: italic; color: var(--accent); }
-    .products-hero-sub { color: rgba(255,255,255,0.5); font-size: 15px; margin: 0; }
-    .result-count-pill {
-        display: inline-flex; align-items: center; gap: 8px;
-        background: rgba(255,255,255,0.07);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 100px; padding: 8px 18px;
-        font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 500; margin-top: 20px;
-    }
-    .result-count-pill strong { color: white; }
 
-    /* Active category chips in hero */
+        .products-hero h1 em {
+            font-style: italic;
+            color: var(--gold-light);
+            font-weight: 400;
+        }
+
+    .products-hero-sub {
+        color: rgba(250, 246, 238, 0.72);
+        font-size: 15px;
+        margin: 0;
+        max-width: 620px;
+        line-height: 1.6;
+    }
+
     .active-cats {
-        display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin-top: 28px;
     }
-    .active-cat-chip {
-        display: inline-flex; align-items: center; gap: 7px;
-        background: rgba(232,54,93,0.15);
-        border: 1px solid rgba(232,54,93,0.35);
-        color: #ff8fa3; border-radius: 100px;
-        padding: 6px 14px; font-size: 12px; font-weight: 700;
-        letter-spacing: 0.5px;
-    }
-    .active-cat-chip i { font-size: 10px; color: var(--accent); }
-    .chip-clear {
-        display: inline-flex; align-items: center; justify-content: center;
-        width: 16px; height: 16px;
-        background: rgba(255,255,255,0.15);
-        border-radius: 50%; font-size: 9px;
-        color: rgba(255,255,255,0.7);
-        text-decoration: none; cursor: pointer;
-        transition: var(--transition);
-        margin-left: 2px;
-    }
-    .chip-clear:hover { background: var(--accent); color: white; }
 
-    /* ===== FILTER BAR ===== */
-    .filter-bar {
-        background: white;
-        border-bottom: 1px solid var(--surface-3);
-        position: sticky; top: 68px; z-index: 100;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    .result-count-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(12, 38, 32, 0.6);
+        border: 1px solid var(--gold);
+        padding: 8px 18px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: var(--gold-light);
+        font-weight: 700;
+        clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
     }
-    .filter-bar-inner {
-        display: flex; align-items: center; gap: 12px;
-        padding: 14px 0; flex-wrap: wrap;
+
+        .result-count-pill strong {
+            color: var(--ivory);
+        }
+
+    .active-cat-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(182, 135, 47, 0.12);
+        border: 1px solid var(--gold);
+        color: var(--gold-light);
+        padding: 7px 16px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
     }
-    .filter-input-wrap {
-        position: relative; flex: 1; min-width: 220px;
+
+    .chip-clear {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        background: transparent;
+        color: var(--gold-light);
+        text-decoration: none;
+        cursor: pointer;
+        transition: var(--transition);
+        margin-left: 4px;
     }
-    .filter-input-wrap i {
-        position: absolute; left: 14px; top: 50%;
-        transform: translateY(-50%);
-        color: var(--ink-muted); font-size: 13px; pointer-events: none;
-    }
-    .filter-input {
-        width: 100%; background: var(--surface-2);
-        border: 1.5px solid var(--surface-3); border-radius: 100px;
-        padding: 10px 16px 10px 38px;
-        font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink);
-        outline: none; transition: var(--transition);
-    }
-    .filter-input:focus {
-        border-color: var(--accent); background: white;
-        box-shadow: 0 0 0 3px var(--accent-glow);
-    }
-    .filter-select-wrap { position: relative; flex-shrink: 0; }
-    .filter-select {
-        background: var(--surface-2);
-        border: 1.5px solid var(--surface-3); border-radius: 100px;
-        padding: 10px 36px 10px 16px;
-        font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink);
-        outline: none; cursor: pointer;
-        appearance: none; -webkit-appearance: none;
-        transition: var(--transition); min-width: 180px;
-    }
-    .filter-select:focus {
-        border-color: var(--accent); background: white;
-        box-shadow: 0 0 0 3px var(--accent-glow);
-    }
-    /* Highlight select when a category is active */
-    .filter-select.has-value {
-        border-color: var(--accent);
-        background: rgba(232,54,93,0.05);
-        color: var(--accent);
-        font-weight: 600;
-    }
-    .filter-select-wrap::after {
-        content: '\f107'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
-        position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-        color: var(--ink-muted); font-size: 11px; pointer-events: none;
-    }
-    .btn-filter-submit {
-        flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px;
-        background: var(--accent); color: white; border: none; border-radius: 100px;
-        padding: 10px 24px; font-family: 'DM Sans', sans-serif;
-        font-size: 13px; font-weight: 700; cursor: pointer; transition: var(--transition);
-    }
-    .btn-filter-submit:hover {
-        background: var(--accent-dark); transform: translateY(-1px);
-        box-shadow: 0 8px 24px rgba(232,54,93,0.25);
-    }
-    .btn-filter-reset {
-        flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
-        background: transparent; color: var(--ink-muted);
-        border: 1.5px solid var(--surface-3); border-radius: 100px;
-        padding: 10px 18px; font-family: 'DM Sans', sans-serif;
-        font-size: 13px; font-weight: 500; cursor: pointer;
-        text-decoration: none; transition: var(--transition);
-    }
-    .btn-filter-reset:hover { border-color: var(--ink-muted); color: var(--ink); }
+
+        .chip-clear:hover {
+            color: var(--ivory);
+            transform: scale(1.15);
+        }
 
     /* ===== CATEGORY QUICK TABS ===== */
     .cat-tabs-bar {
-        background: white;
-        border-bottom: 1px solid var(--surface-3);
+        background: var(--ivory);
+        border-bottom: 1px solid var(--stone-2);
         overflow-x: auto;
         scrollbar-width: none;
     }
-    .cat-tabs-bar::-webkit-scrollbar { display: none; }
+
+        .cat-tabs-bar::-webkit-scrollbar {
+            display: none;
+        }
+
     .cat-tabs-inner {
         display: flex;
-        gap: 0;
+        gap: 2px;
         padding: 0;
         width: max-content;
         min-width: 100%;
     }
+
     .cat-tab {
         flex-shrink: 0;
-        display: flex; align-items: center; gap: 7px;
-        padding: 12px 20px;
-        font-size: 13px; font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 18px 24px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
         color: var(--ink-muted);
         text-decoration: none;
-        border-bottom: 2.5px solid transparent;
+        border-bottom: 2px solid transparent;
         transition: var(--transition);
         white-space: nowrap;
+        position: relative;
     }
-    .cat-tab i { font-size: 12px; }
-    .cat-tab:hover {
+
+        .cat-tab:hover {
+            color: var(--emerald);
+            background: var(--stone);
+        }
+
+        .cat-tab.active {
+            color: var(--emerald);
+            border-bottom-color: var(--gold);
+            background: var(--stone);
+        }
+
+            .cat-tab.active .gem-dot {
+                background: var(--emerald);
+            }
+
+    /* ===== FILTER BAR ===== */
+    .filter-bar {
+        background: var(--stone);
+        border-bottom: 1px solid var(--stone-2);
+        position: sticky;
+        top: 0;
+        z-index: 90;
+        box-shadow: 0 4px 20px rgba(18, 32, 27, 0.04);
+    }
+
+    .filter-bar-inner {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 0;
+        flex-wrap: wrap;
+    }
+
+    .filter-input-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 240px;
+    }
+
+        .filter-input-wrap i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--ink-muted);
+            font-size: 13px;
+            pointer-events: none;
+        }
+
+    .filter-input {
+        width: 100%;
+        background: var(--ivory);
+        border: 1px solid var(--stone-2);
+        border-radius: 0;
+        padding: 13px 18px 13px 44px;
+        font-family: 'Inter', sans-serif;
+        font-size: 12px;
+        letter-spacing: 0.04em;
         color: var(--ink);
-        background: var(--surface-2);
+        outline: none;
+        transition: var(--transition);
     }
-    .cat-tab.active {
-        color: var(--accent);
-        border-bottom-color: var(--accent);
-        background: rgba(232,54,93,0.03);
+
+        .filter-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-glow);
+        }
+
+    .filter-select-wrap {
+        position: relative;
+        flex-shrink: 0;
     }
+
+    .filter-select {
+        background: var(--ivory);
+        border: 1px solid var(--stone-2);
+        border-radius: 0;
+        padding: 13px 42px 13px 18px;
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--ink);
+        outline: none;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        transition: var(--transition);
+        min-width: 200px;
+    }
+
+        .filter-select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-glow);
+        }
+
+        .filter-select.has-value {
+            border-color: var(--gold);
+            background-color: var(--ivory);
+            color: var(--emerald);
+        }
+
+    .filter-select-wrap::after {
+        content: '';
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        border-right: 1.5px solid var(--ink);
+        border-bottom: 1.5px solid var(--ink);
+        transform: translateY(-65%) rotate(45deg);
+        pointer-events: none;
+    }
+
+    .btn-filter-submit {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--emerald);
+        color: var(--ivory);
+        border: none;
+        border-radius: 0;
+        padding: 13px 26px;
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        cursor: pointer;
+        transition: var(--transition);
+        clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    }
+
+        .btn-filter-submit:hover {
+            background: var(--emerald-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--emerald-glow);
+        }
+
+    .btn-filter-reset {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        color: var(--ink-soft);
+        border: 1px solid var(--stone-2);
+        border-radius: 0;
+        padding: 13px 22px;
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        cursor: pointer;
+        text-decoration: none;
+        transition: var(--transition);
+    }
+
+        .btn-filter-reset:hover {
+            border-color: var(--gold);
+            color: var(--ink);
+            background: var(--ivory);
+        }
+
+    /* ===== PRODUCTS SECTION ===== */
+    .products-wrap {
+        background: var(--ivory);
+        min-height: 60vh;
+        padding: 70px 0 110px;
+    }
+
+    .sort-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 36px;
+        flex-wrap: wrap;
+        gap: 16px;
+        border-bottom: 1px solid var(--stone-2);
+        padding-bottom: 20px;
+    }
+
+    .sort-label {
+        font-size: 11px;
+        color: var(--ink-muted);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+    }
+
+        .sort-label strong {
+            color: var(--ink);
+        }
+
+    .view-toggles {
+        display: flex;
+        gap: 8px;
+    }
+
+    .view-toggle-btn {
+        width: 36px;
+        height: 36px;
+        background: var(--stone);
+        border: 1px solid var(--stone-2);
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ink-muted);
+        font-size: 13px;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+        .view-toggle-btn.active,
+        .view-toggle-btn:hover {
+            border-color: var(--gold);
+            color: var(--emerald);
+            background: var(--ivory);
+        }
 
     /* ===== PRODUCT GRID ===== */
-    .products-wrap {
-        background: var(--surface-2); min-height: 60vh; padding: 32px 0 64px;
-    }
-    .sort-row {
-        display: flex; align-items: center; justify-content: space-between;
-        margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
-    }
-    .sort-label { font-size: 13px; color: var(--ink-muted); font-weight: 500; }
-    .sort-label strong { color: var(--ink); }
-    .view-toggles { display: flex; gap: 6px; }
-    .view-toggle-btn {
-        width: 34px; height: 34px; background: white;
-        border: 1.5px solid var(--surface-3); border-radius: var(--radius-sm);
-        display: flex; align-items: center; justify-content: center;
-        color: var(--ink-muted); font-size: 13px; cursor: pointer; transition: var(--transition);
-    }
-    .view-toggle-btn.active, .view-toggle-btn:hover {
-        border-color: var(--accent); color: var(--accent); background: var(--accent-glow);
+    .prod-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 28px;
     }
 
-    /* ===== PRODUCT CARD ===== */
-    .prod-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .prod-grid.list-view { grid-template-columns: 1fr; }
-    .prod-grid.list-view .pcard { flex-direction: row; }
-    .prod-grid.list-view .pcard-img { width: 220px; flex-shrink: 0; aspect-ratio: auto; height: auto; }
-    .prod-grid.list-view .pcard-body { padding: 24px 28px; }
-    .prod-grid.list-view .pcard-desc { display: block !important; }
-    .prod-grid.list-view .pcard-actions { flex-direction: row; }
+        .prod-grid.list-view {
+            grid-template-columns: 1fr;
+        }
 
+            .prod-grid.list-view .pcard {
+                flex-direction: row;
+            }
+
+            .prod-grid.list-view .pcard-img {
+                width: 280px;
+                flex-shrink: 0;
+                aspect-ratio: 1 / 1;
+            }
+
+            .prod-grid.list-view .pcard-body {
+                padding: 36px 40px;
+            }
+
+            .prod-grid.list-view .pcard-desc {
+                display: block !important;
+            }
+
+            .prod-grid.list-view .pcard-actions {
+                flex-direction: row;
+                max-width: 360px;
+            }
+
+    /* ===== PRODUCT CARD (FACET CUT IDENTITY) ===== */
     .pcard {
-        background: white; border-radius: var(--radius-md); overflow: hidden;
-        transition: var(--transition); border: 1px solid transparent;
-        display: flex; flex-direction: column; position: relative;
+        background: var(--stone);
+        border: 1px solid var(--stone-2);
+        border-radius: 0;
+        overflow: visible;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        opacity: 0;
+        transform: translateY(26px);
     }
-    .pcard:hover {
-        transform: translateY(-6px); box-shadow: var(--shadow-lg);
-        border-color: rgba(232,54,93,0.08);
-    }
+
+        .pcard.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gold corner bracket markers */
+        .pcard::before,
+        .pcard::after {
+            content: '';
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 5;
+        }
+
+        .pcard::before {
+            top: -1px;
+            right: -1px;
+            border-top: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            transform: translate(4px, -4px);
+        }
+
+        .pcard::after {
+            bottom: -1px;
+            left: -1px;
+            border-bottom: 2px solid var(--gold);
+            border-left: 2px solid var(--gold);
+            transform: translate(-4px, 4px);
+        }
+
+        .pcard:hover::before,
+        .pcard:hover::after {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
+        .pcard:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(12, 38, 32, 0.08);
+            border-color: var(--stone-2);
+        }
+
+    /* Facet Cut Image Container */
     .pcard-img {
-        position: relative; overflow: hidden;
-        aspect-ratio: 1 / 1.05; background: var(--surface-2); flex-shrink: 0;
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 1 / 1.08;
+        background: var(--ivory);
+        flex-shrink: 0;
+        clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
     }
-    .pcard-img img {
-        width: 100%; height: 100%; object-fit: cover; display: block;
-        transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+
+        .pcard-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+    .pcard:hover .pcard-img img {
+        transform: scale(1.06);
     }
-    .pcard:hover .pcard-img img { transform: scale(1.07); }
+
     .pcard-no-img {
-        width: 100%; height: 100%; min-height: 200px;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        background: linear-gradient(135deg, #f0f0f5 0%, #e4e4ec 100%);
-        color: var(--ink-muted); gap: 8px; font-size: 12px;
+        width: 100%;
+        height: 100%;
+        min-height: 220px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--stone);
+        color: var(--ink-muted);
+        gap: 12px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
     }
-    .pcard-no-img i { font-size: 2rem; opacity: 0.3; }
+
+        .pcard-no-img i {
+            font-size: 1.8rem;
+            color: var(--gold);
+            opacity: 0.6;
+        }
+
     .pcard-badge {
-        position: absolute; top: 12px; left: 12px;
-        padding: 4px 12px; border-radius: 100px;
-        font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
-        text-transform: uppercase; z-index: 3;
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        padding: 5px 12px;
+        border-radius: 0;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        z-index: 3;
+        clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
     }
-    .badge-new { background: var(--ink); color: white; }
-    .badge-low { background: var(--gold); color: white; }
-    .badge-out { background: #d1d5db; color: #6b7280; }
+
+    .badge-new {
+        background: var(--emerald-deep);
+        color: var(--ivory);
+        border-left: 2px solid var(--gold);
+    }
+
+    .badge-low {
+        background: var(--gold);
+        color: var(--ivory);
+    }
+
+    .badge-out {
+        background: var(--stone-2);
+        color: var(--ink-muted);
+    }
+
     .pcard-overlay {
-        position: absolute; inset: 0;
-        background: rgba(10,10,15,0.45);
-        display: flex; align-items: center; justify-content: center; gap: 10px;
-        opacity: 0; transition: opacity 0.3s; z-index: 2;
+        position: absolute;
+        inset: 0;
+        background: rgba(12, 38, 32, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        opacity: 0;
+        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 2;
     }
-    .pcard:hover .pcard-overlay { opacity: 1; }
+
+    .pcard:hover .pcard-overlay {
+        opacity: 1;
+    }
+
     .overlay-btn {
-        width: 44px; height: 44px; background: white; color: var(--ink);
-        border-radius: 50%; display: flex; align-items: center; justify-content: center;
-        font-size: 15px; text-decoration: none;
-        border: none; cursor: pointer;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-        transform: scale(0.8); opacity: 0;
-        transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        width: 44px;
+        height: 44px;
+        background: var(--ivory);
+        color: var(--emerald);
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        transform: translateY(10px);
+        opacity: 0;
+        transition: var(--transition);
+        clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
     }
-    .pcard:hover .overlay-btn { transform: scale(1); opacity: 1; }
-    .pcard:hover .overlay-btn:nth-child(2) { transition-delay: 0.06s; }
-    .overlay-btn:hover { background: var(--accent); color: white; }
-    .pcard-body { padding: 18px 18px 20px; flex-grow: 1; display: flex; flex-direction: column; }
-    .pcard-cat { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-    .pcard-name { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.35; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: var(--transition); }
-    .pcard:hover .pcard-name { color: var(--accent); }
-    .pcard-desc { font-size: 13px; color: var(--ink-muted); line-height: 1.6; margin-bottom: 10px; display: none; }
-    .pcard-stars { display: flex; align-items: center; gap: 2px; margin-bottom: 14px; }
-    .pcard-stars i { font-size: 11px; color: #f5a623; }
-    .pcard-stars span { font-size: 11px; color: var(--ink-muted); margin-left: 5px; }
-    .pcard-price { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--ink); line-height: 1; margin-bottom: 14px; }
-    .pcard-price sup { font-size: 0.7rem; vertical-align: super; font-family: 'DM Sans', sans-serif; font-weight: 600; }
-    .pcard-actions { display: flex; gap: 6px; flex-direction: column; width: 100%; margin-top: auto; }
+
+    .pcard:hover .overlay-btn {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+        .pcard:hover .overlay-btn:nth-child(2) {
+            transition-delay: 0.05s;
+        }
+
+    .overlay-btn:hover {
+        background: var(--emerald);
+        color: var(--gold-light);
+    }
+
+    .pcard-body {
+        padding: 22px 22px 24px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        background: var(--ivory);
+    }
+
+    .pcard-cat {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 8px;
+    }
+
+    .pcard-name {
+        font-family: 'Fraunces', serif;
+        font-size: 17px;
+        font-weight: 500;
+        color: var(--ink);
+        line-height: 1.35;
+        margin-bottom: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        transition: var(--transition);
+    }
+
+    .pcard:hover .pcard-name {
+        color: var(--emerald);
+    }
+
+    .pcard-desc {
+        font-size: 13px;
+        color: var(--ink-soft);
+        line-height: 1.6;
+        margin-bottom: 14px;
+        display: none;
+    }
+
+    .pcard-stars {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        margin-bottom: 16px;
+    }
+
+        .pcard-stars i {
+            font-size: 10px;
+            color: var(--gold);
+        }
+
+        .pcard-stars span {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--ink-muted);
+            margin-left: 6px;
+            letter-spacing: 0.05em;
+        }
+
+    .pcard-price {
+        font-family: 'Fraunces', serif;
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: var(--emerald-deep);
+        line-height: 1;
+        margin-bottom: 18px;
+    }
+
+        .pcard-price sup {
+            font-size: 0.75rem;
+            vertical-align: super;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: var(--gold);
+            margin-right: 2px;
+        }
+
+    .pcard-actions {
+        display: flex;
+        gap: 8px;
+        flex-direction: column;
+        width: 100%;
+        margin-top: auto;
+    }
+
     .btn-to-cart {
-        display: flex; align-items: center; justify-content: center; gap: 7px;
-        background: var(--accent); color: white; border: none; border-radius: var(--radius-sm);
-        padding: 10px 16px; font-family: 'DM Sans', sans-serif;
-        font-size: 13px; font-weight: 700; cursor: pointer; transition: var(--transition);
-        text-decoration: none; width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: var(--emerald);
+        color: var(--ivory);
+        border: none;
+        border-radius: 0;
+        padding: 12px 18px;
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        width: 100%;
+        clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
     }
-    .btn-to-cart:hover:not(:disabled) {
-        background: var(--accent-dark); transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(232,54,93,0.25); color: white;
-    }
-    .btn-to-cart:disabled { background: var(--surface-3); color: var(--ink-muted); cursor: not-allowed; }
+
+        .btn-to-cart:hover:not(:disabled) {
+            background: var(--emerald-deep);
+            color: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px var(--emerald-glow);
+        }
+
+        .btn-to-cart:disabled {
+            background: var(--stone-2);
+            color: var(--ink-muted);
+            cursor: not-allowed;
+        }
+
     .btn-to-wishlist {
-        display: flex; align-items: center; justify-content: center; gap: 7px;
-        background: transparent; color: var(--ink-soft);
-        border: 1.5px solid var(--surface-3); border-radius: var(--radius-sm);
-        padding: 9px 16px; font-family: 'DM Sans', sans-serif;
-        font-size: 13px; font-weight: 600; cursor: pointer; transition: var(--transition); width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: transparent;
+        color: var(--ink-soft);
+        border: 1px solid var(--stone-2);
+        border-radius: 0;
+        padding: 11px 18px;
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        cursor: pointer;
+        transition: var(--transition);
+        width: 100%;
+        text-decoration: none;
     }
-    .btn-to-wishlist:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+        .btn-to-wishlist:hover {
+            border-color: var(--gold);
+            color: var(--emerald);
+            background: var(--stone);
+        }
 
     /* ===== EMPTY STATE ===== */
     .empty-state {
-        text-align: center; padding: 80px 20px; background: white;
-        border-radius: var(--radius-lg); border: 1.5px dashed var(--surface-3);
+        text-align: center;
+        padding: 90px 30px;
+        background: var(--stone);
+        border: 1px solid var(--stone-2);
+        position: relative;
+        clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
     }
+
     .empty-icon {
-        width: 80px; height: 80px; background: var(--surface-2); border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 32px; color: var(--ink-muted); margin: 0 auto 24px;
-        animation: emptyFloat 3s ease-in-out infinite;
+        width: 68px;
+        height: 68px;
+        background: var(--ivory);
+        border: 1px solid var(--stone-2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        color: var(--gold);
+        margin: 0 auto 24px;
+        transform: rotate(45deg);
     }
-    @@keyframes emptyFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
-    .empty-state h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--ink); margin-bottom: 8px; }
-    .empty-state p { color: var(--ink-muted); font-size: 14px; margin-bottom: 28px; }
+
+        .empty-icon i {
+            transform: rotate(-45deg);
+        }
+
+    .empty-state h3 {
+        font-family: 'Fraunces', serif;
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: var(--ink);
+        margin-bottom: 10px;
+    }
+
+    .empty-state p {
+        color: var(--ink-soft);
+        font-size: 14px;
+        margin-bottom: 30px;
+        max-width: 460px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+    }
 
     /* ===== RESPONSIVE ===== */
-    @@media (max-width: 1199px) { .prod-grid { grid-template-columns: repeat(3, 1fr); } }
+    @@media (max-width: 1199px) {
+        .prod-grid
+
+    {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+    }
+
+    }
     @@media (max-width: 991px) {
-        .prod-grid { grid-template-columns: repeat(2, 1fr); }
-        .prod-grid.list-view .pcard-img { width: 180px; }
+        .prod-grid
+
+    {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .prod-grid.list-view .pcard-img {
+        width: 220px;
+    }
+
     }
     @@media (max-width: 767px) {
-        .filter-bar-inner { gap: 8px; }
-        .filter-input-wrap { min-width: 100%; order: 1; }
-        .filter-select-wrap { flex: 1; }
-        .btn-filter-reset { display: none; }
-        .cat-tab { padding: 11px 14px; font-size: 12px; }
+        .filter-bar-inner
+
+    {
+        gap: 10px;
+    }
+
+    .filter-input-wrap {
+        min-width: 100%;
+    }
+
+    .filter-select-wrap {
+        flex: 1;
+    }
+
+    .filter-select {
+        min-width: 100%;
+    }
+
+    .btn-filter-reset {
+        display: none;
+    }
+
+    .cat-tab {
+        padding: 14px 18px;
+        font-size: 10px;
+    }
+
+    .products-hero {
+        padding: 60px 0 50px;
+    }
+
     }
     @@media (max-width: 575px) {
-        .prod-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .prod-grid.list-view { grid-template-columns: 1fr; }
-        .prod-grid.list-view .pcard { flex-direction: column; }
-        .prod-grid.list-view .pcard-img { width: 100%; }
-        .products-hero { padding: 36px 0 28px; }
-        .sort-row { flex-direction: column; align-items: flex-start; }
+        .prod-grid
+
+    {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .prod-grid.list-view .pcard {
+        flex-direction: column;
+    }
+
+    .prod-grid.list-view .pcard-img {
+        width: 100%;
+    }
+
+    .sort-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    }
+
+    @@media (prefers-reduced-motion: reduce) {
+        .pcard, .pcard-img img, .overlay-btn, .btn-to-cart, .btn-to-wishlist
+
+    {
+        transition: none !important;
+        transform: none !important;
+    }
+
     }
 </style>
 
 <!-- ===== PAGE HERO ===== -->
-<div class="products-hero">
+<section class="products-hero">
     <div class="container hero-inner">
+        <!-- Eyebrow -->
+        <div class="hero-eyebrow">
+            <span class="gem-dot"></span>
+            AQSA Fine Jewelry &amp; Accessories
+        </div>
+
         <!-- Breadcrumb -->
         <div class="hero-crumb">
             <a asp-controller="Home" asp-action="Index">Home</a>
-            <i class="fas fa-chevron-right"></i>
+            <span class="crumb-sep">/</span>
             @if (!string.IsNullOrEmpty(selectedCatName))
             {
-                <a asp-controller="Home" asp-action="Products">All Products</a>
-                <i class="fas fa-chevron-right"></i>
+                <a asp-controller="Home" asp-action="Products">All Collections</a>
+                <span class="crumb-sep">/</span>
                 <span class="current">@selectedCatName</span>
             }
             else if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string))
             {
-                <a asp-controller="Home" asp-action="Products">All Products</a>
-                <i class="fas fa-chevron-right"></i>
+                <a asp-controller="Home" asp-action="Products">All Collections</a>
+                <span class="crumb-sep">/</span>
                 <span class="current">Search Results</span>
             }
             else
             {
-                <span class="current">All Products</span>
+                <span class="current">All Collections</span>
             }
         </div>
 
@@ -398,7 +1019,7 @@
         <h1>
             @if (!string.IsNullOrEmpty(selectedCatName))
             {
-                <text><em>@selectedCatName</em></text>
+                <text>The <em>@selectedCatName</em> Collection</text>
             }
             else if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string))
             {
@@ -406,30 +1027,29 @@
             }
             else
             {
-                <text>Our <em>Products</em></text>
+                <text>Curated <em>Creations</em></text>
             }
         </h1>
         <p class="products-hero-sub">
             @if (!string.IsNullOrEmpty(selectedCatName))
             {
-                <text>Browsing @selectedCatName — curated just for you</text>
+                <text>Hand-finished @selectedCatName, cut with exacting precision and timeless elegance.</text>
             }
             else
             {
-                <text>Discover premium brands at unbeatable prices</text>
+                <text>Explore signature fine jewelry and artisanal accessories, handcrafted to reflect enduring light.</text>
             }
         </p>
 
         <!-- Active filter chips -->
         <div class="active-cats">
             <div class="result-count-pill">
-                <i class="fas fa-box-open" style="color: var(--accent); font-size:12px;"></i>
-                <span><strong>@Model.Count()</strong> products found</span>
+                <span class="gem-dot"></span>
+                <span><strong>@Model.Count()</strong> Pieces available</span>
             </div>
             @if (!string.IsNullOrEmpty(selectedCatName))
             {
                 <div class="active-cat-chip">
-                    <i class="fas fa-tag"></i>
                     @selectedCatName
                     <a asp-action="Products" class="chip-clear" title="Clear filter">
                         <i class="fas fa-times"></i>
@@ -439,7 +1059,6 @@
             @if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string))
             {
                 <div class="active-cat-chip">
-                    <i class="fas fa-search"></i>
                     "@ViewBag.SearchTerm"
                     <a asp-action="Products" asp-route-categoryId="@ViewBag.SelectedCategory" class="chip-clear" title="Clear search">
                         <i class="fas fa-times"></i>
@@ -448,40 +1067,25 @@
             }
         </div>
     </div>
-</div>
+</section>
 
 <!-- ===== CATEGORY QUICK TABS ===== -->
-<div class="cat-tabs-bar">
+<nav class="cat-tabs-bar" aria-label="Product Categories">
     <div class="container p-0">
         <div class="cat-tabs-inner">
             <a asp-action="Products" class="cat-tab @(ViewBag.SelectedCategory == null || (int?)ViewBag.SelectedCategory == 0 ? "active" : "")">
-                <i class="fas fa-th"></i> All
+                <span class="gem-dot"></span> All Pieces
             </a>
             @foreach (var cat in (List<BrandsStore.Models.Category>)ViewBag.Categories)
             {
                 <a asp-action="Products" asp-route-categoryId="@cat.CategoryId"
                    class="cat-tab @((int?)ViewBag.SelectedCategory == cat.CategoryId ? "active" : "")">
-                    @{
-                        string icon = cat.Name switch {
-                            "Electronics" => "fa-laptop",
-                            "Clothing" => "fa-tshirt",
-                            "Shoes" => "fa-shoe-prints",
-                            "Accessories" => "fa-watch",
-                            "Books" => "fa-book",
-                            "Jewelry" => "fa-gem",
-                            "Sports & Fitness" => "fa-dumbbell",
-                            "Home & Kitchen" => "fa-home",
-                            "Shirts" => "fa-male",
-                            "Pants" => "fa-user",
-                            _ => "fa-tag"
-                        };
-                    }
-                    <i class="fas @icon"></i> @cat.Name
+                    <span class="gem-dot"></span> @cat.Name
                 </a>
             }
         </div>
     </div>
-</div>
+</nav>
 
 <!-- ===== SEARCH FILTER BAR ===== -->
 <div class="filter-bar">
@@ -490,7 +1094,7 @@
             <div class="filter-input-wrap">
                 <i class="fas fa-search"></i>
                 <input type="text" name="search" class="filter-input"
-                       placeholder="Search products, brands..."
+                       placeholder="Search jewelry, precious stones, collections..."
                        value="@ViewBag.SearchTerm" autocomplete="off">
             </div>
             <div class="filter-select-wrap">
@@ -499,48 +1103,48 @@
                     @foreach (var category in (List<BrandsStore.Models.Category>)ViewBag.Categories)
                     {
                         <option value="@category.CategoryId"
-                                @@((int?)ViewBag.SelectedCategory == category.CategoryId ? "selected" : "")>
+                                selected="@(ViewBag.SelectedCategory == category.CategoryId ? "selected" : null)">
                             @category.Name
                         </option>
                     }
                 </select>
             </div>
             <button type="submit" class="btn-filter-submit">
-                <i class="fas fa-search"></i> Search
+                <i class="fas fa-filter" style="font-size: 10px;"></i> Filter
             </button>
             @if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string) || (ViewBag.SelectedCategory != null && (int?)ViewBag.SelectedCategory > 0))
             {
                 <a asp-action="Products" class="btn-filter-reset">
-                    <i class="fas fa-times"></i> Clear All
+                    <i class="fas fa-times" style="font-size: 10px;"></i> Reset
                 </a>
             }
         </form>
     </div>
 </div>
 
-<!-- ===== PRODUCTS GRID ===== -->
-<div class="products-wrap">
+<!-- ===== PRODUCTS SECTION ===== -->
+<section class="products-wrap">
     <div class="container">
         @if (Model.Any())
         {
             <div class="sort-row">
                 <div class="sort-label">
-                    Showing <strong>@Model.Count() products</strong>
+                    Showing <strong>@Model.Count() Pieces</strong>
                     @if (!string.IsNullOrEmpty(selectedCatName))
                     {
                         <text> in <strong>@selectedCatName</strong></text>
                     }
                     @if (!string.IsNullOrEmpty(ViewBag.SearchTerm as string))
                     {
-                        <text> matching "<strong>@ViewBag.SearchTerm</strong>"</text>
+                        <text> for "<strong>@ViewBag.SearchTerm</strong>"</text>
                     }
                 </div>
                 <div class="view-toggles">
-                    <button class="view-toggle-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid View">
-                        <i class="fas fa-th"></i>
+                    <button class="view-toggle-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid View" aria-label="Grid view">
+                        <i class="fas fa-th-large"></i>
                     </button>
-                    <button class="view-toggle-btn" id="listViewBtn" onclick="setView('list')" title="List View">
-                        <i class="fas fa-list"></i>
+                    <button class="view-toggle-btn" id="listViewBtn" onclick="setView('list')" title="List View" aria-label="List view">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
@@ -548,19 +1152,25 @@
             <div class="prod-grid" id="prodGrid">
                 @foreach (var product in Model)
                 {
-                    <div class="pcard">
+                    <article class="pcard" data-reveal>
                         @if (product.StockQuantity == 0)
-                        { <span class="pcard-badge badge-out">Out of Stock</span> }
+                        {
+                            <span class="pcard-badge badge-out">Out of Stock</span>
+                        }
                         else if (product.StockQuantity < 10)
-                        { <span class="pcard-badge badge-low">Low Stock</span> }
+                        {
+                            <span class="pcard-badge badge-low">Low Stock</span>
+                        }
 
                         <div class="pcard-img">
                             @if (!string.IsNullOrEmpty(product.ImageUrl))
-                            { <img src="@product.ImageUrl" alt="@product.Name" loading="lazy"> }
+                            {
+                                <img src="@product.ImageUrl" alt="@product.Name" loading="lazy">
+                            }
                             else
                             {
                                 <div class="pcard-no-img">
-                                    <i class="fas fa-image"></i>
+                                    <i class="fas fa-gem"></i>
                                     <span>@product.Name</span>
                                 </div>
                             }
@@ -582,19 +1192,22 @@
                         </div>
 
                         <div class="pcard-body">
-                            <div class="pcard-cat">@product.Category.Name</div>
-                            <div class="pcard-name">@product.Name</div>
+                            <div class="pcard-cat">
+                                <span class="gem-dot"></span>
+                                @product.Category.Name
+                            </div>
+                            <h2 class="pcard-name">@product.Name</h2>
                             @if (!string.IsNullOrEmpty(product.Description))
                             {
-                                <div class="pcard-desc">
+                                <p class="pcard-desc">
                                     @(product.Description.Length > 90 ? product.Description.Substring(0, 90) + "…" : product.Description)
-                                </div>
+                                </p>
                             }
                             <div class="pcard-stars">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i>
                                 <i class="fas fa-star-half-alt"></i>
-                                <span>(4.5)</span>
+                                <span>(4.9)</span>
                             </div>
                             <div class="pcard-price"><sup>₹</sup>@product.Price.ToString("N0")</div>
                             <div class="pcard-actions">
@@ -606,13 +1219,13 @@
                                             <input type="hidden" name="productId" value="@product.ProductId" />
                                             <input type="hidden" name="quantity" value="1" />
                                             <button type="submit" class="btn-to-cart">
-                                                <i class="fas fa-bag-shopping"></i> Add to Cart
+                                                <i class="fas fa-shopping-bag"></i> Acquire Piece
                                             </button>
                                         </form>
                                         <form asp-controller="Wishlist" asp-action="AddToWishlist" method="post" class="m-0 w-100">
                                             <input type="hidden" name="productId" value="@product.ProductId" />
                                             <button type="submit" class="btn-to-wishlist">
-                                                <i class="fas fa-heart"></i> Wishlist
+                                                <i class="fas fa-heart"></i> Save to Wishlist
                                             </button>
                                         </form>
                                     }
@@ -626,7 +1239,7 @@
                                 else
                                 {
                                     <a asp-controller="Account" asp-action="Login" class="btn-to-cart">
-                                        <i class="fas fa-sign-in-alt"></i> Login to Buy
+                                        <i class="fas fa-lock"></i> Sign In to Acquire
                                     </a>
                                     <a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@product.ProductId" class="btn-to-wishlist">
                                         <i class="fas fa-eye"></i> View Details
@@ -634,48 +1247,73 @@
                                 }
                             </div>
                         </div>
-                    </div>
+                    </article>
                 }
             </div>
         }
         else
         {
             <div class="empty-state">
-                <div class="empty-icon"><i class="fas fa-search"></i></div>
-                <h3>No products found</h3>
+                <div class="empty-icon"><i class="fas fa-gem"></i></div>
+                <h3>No Pieces Found</h3>
                 <p>
                     @if (!string.IsNullOrEmpty(selectedCatName))
                     {
-                        <text>No products available in <strong>@selectedCatName</strong> right now.</text>
+                        <text>There are currently no pieces cataloged under <strong>@selectedCatName</strong>.</text>
                     }
                     else
                     {
-                        <text>Try adjusting your search or browse all our categories below.</text>
+                        <text>Refine your search parameters or discover our complete jewelry collections.</text>
                     }
                 </p>
-                <a asp-action="Products" class="btn-to-cart" style="display:inline-flex; width:auto; padding:12px 28px; border-radius:100px;">
-                    <i class="fas fa-arrow-left"></i> Browse All Products
+                <a asp-action="Products" class="btn-to-cart" style="display:inline-flex; width:auto; padding:14px 32px;">
+                    Browse All Collections
                 </a>
             </div>
         }
     </div>
-</div>
+</section>
 
 @section Scripts {
-<script>
-    function setView(mode) {
-        const grid = document.getElementById('prodGrid');
-        const gBtn = document.getElementById('gridViewBtn');
-        const lBtn = document.getElementById('listViewBtn');
-        if (mode === 'list') {
-            grid.classList.add('list-view');
-            lBtn.classList.add('active'); gBtn.classList.remove('active');
-            document.querySelectorAll('.pcard-desc').forEach(d => d.style.display = 'block');
-        } else {
-            grid.classList.remove('list-view');
-            gBtn.classList.add('active'); lBtn.classList.remove('active');
-            document.querySelectorAll('.pcard-desc').forEach(d => d.style.display = 'none');
+    <script>
+        function setView(mode) {
+            const grid = document.getElementById('prodGrid');
+            const gBtn = document.getElementById('gridViewBtn');
+            const lBtn = document.getElementById('listViewBtn');
+            if (!grid) return;
+
+            if (mode === 'list') {
+                grid.classList.add('list-view');
+                lBtn.classList.add('active');
+                gBtn.classList.remove('active');
+                document.querySelectorAll('.pcard-desc').forEach(d => d.style.display = 'block');
+            } else {
+                grid.classList.remove('list-view');
+                gBtn.classList.add('active');
+                lBtn.classList.remove('active');
+                document.querySelectorAll('.pcard-desc').forEach(d => d.style.display = 'none');
+            }
         }
-    }
-</script>
+
+        // Scroll reveal observer
+        document.addEventListener('DOMContentLoaded', function () {
+            const reveals = document.querySelectorAll('[data-reveal]');
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry, idx) => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                entry.target.classList.add('is-revealed');
+                            }, idx * 60);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                reveals.forEach(el => observer.observe(el));
+            } else {
+                reveals.forEach(el => el.classList.add('is-revealed'));
+            }
+        });
+    </script>
 }

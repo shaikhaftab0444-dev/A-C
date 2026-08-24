@@ -1,324 +1,424 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BrandsStore</title>
+    <title>@ViewData["Title"] - AQSA COLLECTION</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         *, *::before, *::after {
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #ffffff;
-            color: #0a0a0f;
+        :root {
+            /* ===== FACETED GEM PALETTE ===== */
+            --ink: #12201b;
+            --ink-soft: #3f4f47;
+            --ink-muted: #7d8b83;
+            --ivory: #faf6ee;
+            --stone: #f1ebdc;
+            --stone-2: #e6dcc7;
+            --emerald: #1f4d3d;
+            --emerald-deep: #0c2620;
+            --emerald-glow: rgba(31,77,61,.14);
+            --gold: #b6872f;
+            --gold-light: #e8cd8a;
+            --gold-glow: rgba(182,135,47,.18);
+            --rose: #c98a7d;
+            --green-ok: #2f7a52;
+            --nav-h: 108px;
+            --cut: 14px;
+            --transition: all .35s cubic-bezier(.4,0,.2,1);
+            --shadow-sm: 0 2px 14px rgba(18,32,27,.06);
+            --shadow-md: 0 10px 34px rgba(18,32,27,.10);
+            --shadow-lg: 0 26px 60px rgba(18,32,27,.16);
         }
 
-        :root {
-            --ink: #0a0a0f;
-            --ink-soft: #3a3a4a;
-            --ink-muted: #7a7a8c;
-            --surface: #ffffff;
-            --surface-2: #f5f5f8;
-            --surface-3: #e8e8ef;
-            --accent: #e8365d;
-            --accent-dark: #c42548;
-            --accent-glow: rgba(232,54,93,0.12);
-            --gold: #c9a227;
-            --green: #00b074;
-            --nav-h: 68px;
-            --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        html {
+            scroll-behavior: smooth;
         }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--ivory);
+            color: var(--ink);
+        }
+
+        ::selection {
+            background: var(--gold-light);
+            color: var(--ink);
+        }
+
+        /* facet-cut: the signature angular corner motif used across cards, buttons, panels */
+        .facet-cut {
+            clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, var(--cut) 100%, 0 calc(100% - var(--cut)));
+        }
+
+        .facet-cut-sm {
+            clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+        }
+
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+        }
+
+            [data-reveal].in-view {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        @@media (prefers-reduced-motion: reduce) {
+            [data-reveal] {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            * {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+
+        /* ===== TOPBAR ===== */
+        .topbar {
+            background: var(--emerald-deep);
+            color: rgba(250,246,238,.75);
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 8px 12px;
+        }
+
+            .topbar strong {
+                color: var(--gold-light);
+                font-weight: 700;
+            }
 
         /* ===== NAVBAR ===== */
         .main-header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(10,10,15,0.96);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            height: var(--nav-h);
+            background: rgba(250,246,238,.86);
+            backdrop-filter: blur(16px) saturate(140%);
+            -webkit-backdrop-filter: blur(16px) saturate(140%);
+            border-bottom: 1px solid rgba(18,32,27,.08);
         }
-
-            .main-header .navbar {
-                padding: 0;
-                height: var(--nav-h);
-            }
 
         .navbar-brand {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: 1.5rem;
-            color: white !important;
-            letter-spacing: -0.02em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-            .navbar-brand:hover {
-                opacity: 0.85;
-            }
-
-        .brand-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            margin-left: 2px;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-
-        @@keyframes pulse-dot {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-
-            50% {
-                transform: scale(1.4);
-                opacity: 0.7;
-            }
-        }
-
-        .nav-link {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            color: rgba(255,255,255,0.7) !important;
-            padding: 8px 14px !important;
-            border-radius: 8px;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-decoration: none;
-        }
-
-            .nav-link:hover, .nav-link.active-link {
-                color: white !important;
-                background: rgba(255,255,255,0.08);
-            }
-
-            .nav-link i {
-                font-size: 12px;
-                opacity: 0.7;
-            }
-
-        /* Dropdown */
-        .dropdown-menu {
-            background: #14141e;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 14px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            padding: 8px;
-            min-width: 210px;
-            margin-top: 8px !important;
-            animation: dropIn 0.2s ease-out;
-        }
-
-        @@keyframes dropIn {
-            from {
-                opacity: 0;
-                transform: translateY(-8px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .dropdown-item {
-            color: rgba(255,255,255,0.65);
-            font-size: 13px;
-            font-weight: 500;
-            padding: 9px 14px;
-            border-radius: 8px;
-            transition: var(--transition);
-            display: flex;
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-optical-sizing: auto;
+            font-size: 1.9rem;
+            color: var(--ink) !important;
+            letter-spacing: .1em;
+            text-decoration: none !important;
+            display: inline-flex;
             align-items: center;
             gap: 10px;
         }
 
-            .dropdown-item:hover {
-                background: rgba(232,54,93,0.1);
-                color: white;
-            }
-
-            .dropdown-item i {
-                color: var(--accent);
-                font-size: 12px;
-                width: 14px;
-            }
-
-        .dropdown-divider {
-            border-color: rgba(255,255,255,0.08);
-            margin: 4px 0;
+        .brand-mark {
+            width: 9px;
+            height: 9px;
+            background: var(--gold);
+            transform: rotate(45deg);
+            display: inline-block;
         }
 
-        /* Nav Icons */
         .nav-icon-btn {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            color: rgba(255,255,255,0.7) !important;
+            width: 38px;
+            height: 38px;
+            color: var(--ink-soft) !important;
             transition: var(--transition);
-            font-size: 16px;
-            text-decoration: none;
-            padding: 0 !important;
+            font-size: 15px;
+            text-decoration: none !important;
         }
 
             .nav-icon-btn:hover {
-                background: rgba(255,255,255,0.08);
-                color: white !important;
+                color: var(--gold) !important;
+                transform: translateY(-2px);
             }
 
         .nav-badge {
             position: absolute;
-            top: -4px;
-            right: -4px;
-            background: var(--accent);
-            color: white;
+            top: -2px;
+            right: -2px;
+            background: var(--emerald);
+            color: var(--ivory);
             font-size: 9px;
             font-weight: 800;
-            min-width: 17px;
-            height: 17px;
-            border-radius: 50%;
+            min-width: 16px;
+            height: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #0a0a0f;
+            border: 2px solid var(--ivory);
             line-height: 1;
         }
 
-        .nav-sep {
-            width: 1px;
-            height: 22px;
-            background: rgba(255,255,255,0.1);
-            margin: 0 6px;
-            align-self: center;
+        .premium-nav-link {
+            font-family: 'Inter', sans-serif !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            letter-spacing: .16em !important;
+            color: var(--ink-soft) !important;
+            text-transform: uppercase !important;
+            padding: 6px 2px !important;
+            position: relative;
+            text-decoration: none !important;
+            transition: color .3s ease;
+            display: inline-block;
         }
 
-        /* User pill */
-        .user-pill {
+            .premium-nav-link::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                transform: scaleX(0);
+                height: 1.5px;
+                bottom: 0;
+                left: 0;
+                background: var(--gold);
+                transform-origin: bottom right;
+                transition: transform .45s cubic-bezier(.16,1,.3,1);
+            }
+
+            .premium-nav-link:hover::after {
+                transform: scaleX(1);
+                transform-origin: bottom left;
+            }
+
+            .premium-nav-link:hover {
+                color: var(--ink) !important;
+            }
+
+            .premium-nav-link.is-accent {
+                color: var(--emerald) !important;
+            }
+
+                .premium-nav-link.is-accent::after {
+                    background: var(--emerald);
+                }
+
+        .main-header ul.nav::-webkit-scrollbar {
+            display: none !important;
+        }
+
+        .main-header ul.nav {
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
+        }
+
+        @@media(max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .premium-nav-link {
+                font-size: 10px !important;
+                letter-spacing: .1em !important;
+            }
+        }
+
+        /* ===== MOBILE MENU TOGGLE ===== */
+        .menu-toggle-btn {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background: none;
+            border: none;
+            color: var(--ink);
+            font-size: 18px;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .desktop-nav-row {
+            display: block;
+        }
+
+        @@media(max-width: 768px) {
+            .menu-toggle-btn {
+                display: flex;
+            }
+
+            .desktop-nav-row {
+                display: none !important;
+            }
+        }
+
+        /* ===== MOBILE OFF-CANVAS NAV ===== */
+        .mobile-nav-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(12,38,32,.55);
+            backdrop-filter: blur(2px);
+            z-index: 1400;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .35s ease;
+        }
+
+            .mobile-nav-overlay.is-open {
+                opacity: 1;
+                visibility: visible;
+            }
+
+        .mobile-nav-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: min(84vw, 340px);
+            background: var(--ivory);
+            z-index: 1500;
+            transform: translateX(100%);
+            transition: transform .4s cubic-bezier(.16,1,.3,1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-lg);
+        }
+
+            .mobile-nav-panel.is-open {
+                transform: translateX(0);
+            }
+
+        .mobile-nav-head {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 6px 12px 6px 6px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 100px;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: white !important;
-            font-size: 13px;
-            font-weight: 600;
+            justify-content: space-between;
+            padding: 20px 22px;
+            border-bottom: 1px solid rgba(18,32,27,.08);
+            background: var(--emerald-deep);
+        }
+
+            .mobile-nav-head span {
+                font-family: 'Fraunces', serif;
+                font-size: 1.15rem;
+                font-weight: 600;
+                color: var(--ivory);
+                letter-spacing: .06em;
+            }
+
+        .mobile-nav-close {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(250,246,238,.08);
+            border: none;
+            color: var(--gold-light);
+            font-size: 15px;
             cursor: pointer;
             transition: var(--transition);
         }
 
-            .user-pill:hover {
-                background: rgba(255,255,255,0.1);
-                border-color: rgba(255,255,255,0.2);
+            .mobile-nav-close:hover {
+                background: rgba(250,246,238,.16);
             }
 
-        .user-avatar {
-            width: 28px;
-            height: 28px;
-            background: var(--accent);
-            border-radius: 50%;
+        .mobile-nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 10px 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+            .mobile-nav-links li {
+                border-bottom: 1px solid rgba(18,32,27,.06);
+            }
+
+            .mobile-nav-links a {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 16px 22px;
+                font-family: 'Inter', sans-serif;
+                font-size: 13px;
+                font-weight: 700;
+                letter-spacing: .1em;
+                text-transform: uppercase;
+                color: var(--ink-soft);
+                text-decoration: none !important;
+                transition: var(--transition);
+            }
+
+                .mobile-nav-links a i {
+                    font-size: 11px;
+                    color: var(--gold);
+                    opacity: 0;
+                    transform: translateX(-4px);
+                    transition: var(--transition);
+                }
+
+                .mobile-nav-links a:hover {
+                    color: var(--ink);
+                    background: var(--stone);
+                    padding-left: 28px;
+                }
+
+                    .mobile-nav-links a:hover i {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+
+                .mobile-nav-links a.is-accent {
+                    color: var(--emerald);
+                }
+
+        .mobile-nav-foot {
+            padding: 18px 22px 24px;
+            border-top: 1px solid rgba(18,32,27,.08);
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-            color: white;
-            flex-shrink: 0;
+            gap: 14px;
         }
 
-        .user-pill .caret {
-            font-size: 10px;
-            opacity: 0.6;
-        }
-
-        /* Auth buttons */
-        .btn-nav-login {
-            padding: 8px 20px;
-            background: transparent;
-            border: 1.5px solid rgba(255,255,255,0.2);
-            border-radius: 100px;
-            color: rgba(255,255,255,0.8) !important;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-            .btn-nav-login:hover {
-                border-color: rgba(255,255,255,0.5);
-                color: white !important;
-            }
-
-        .btn-nav-register {
-            padding: 8px 20px;
-            background: var(--accent);
-            border: none;
-            border-radius: 100px;
-            color: white !important;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-            .btn-nav-register:hover {
-                background: var(--accent-dark);
-                transform: translateY(-1px);
-            }
-
-        .navbar-toggler {
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 8px;
-            padding: 6px 10px;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        }
-
-        @@media (max-width: 575px) {
-            .navbar-collapse {
-                background: #14141e;
-                border: 1px solid rgba(255,255,255,0.08);
-                border-radius: 14px;
-                margin-top: 10px;
-                padding: 12px;
-            }
-
-            .nav-icon-btn {
-                width: auto;
-                padding: 8px 14px !important;
+            .mobile-nav-foot a {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 gap: 8px;
+                padding: 12px;
+                background: var(--stone);
+                color: var(--ink) !important;
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: .08em;
+                text-transform: uppercase;
+                text-decoration: none !important;
+                transition: var(--transition);
             }
+
+                .mobile-nav-foot a:hover {
+                    background: var(--emerald);
+                    color: var(--ivory) !important;
+                }
+
+        body.mobile-nav-locked {
+            overflow: hidden;
         }
 
         /* ===== ALERTS ===== */
@@ -335,22 +435,22 @@
 
             .global-alert-zone .alert {
                 pointer-events: all;
-                border-radius: 12px;
+                border-radius: 0;
                 border: none;
-                box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+                box-shadow: var(--shadow-lg);
                 font-size: 14px;
                 font-weight: 500;
-                padding: 12px 18px;
+                padding: 14px 18px;
                 display: flex;
                 align-items: center;
                 gap: 10px;
                 min-width: 280px;
-                animation: alertSlide 0.3s ease-out;
+                animation: alertSlide .4s cubic-bezier(.16,1,.3,1);
             }
 
         @@keyframes alertSlide {
             from {
-                transform: translateX(100%);
+                transform: translateX(110%);
                 opacity: 0;
             }
 
@@ -361,92 +461,115 @@
         }
 
         .alert-success {
-            background: white;
-            border-left: 4px solid var(--green) !important;
+            background: var(--ivory);
+            border-left: 3px solid var(--green-ok) !important;
             color: var(--ink);
         }
 
         .alert-danger {
-            background: white;
-            border-left: 4px solid var(--accent) !important;
+            background: var(--ivory);
+            border-left: 3px solid #b3432f !important;
             color: var(--ink);
         }
 
         /* ===== FOOTER ===== */
         .site-footer {
-            background: var(--ink);
-            color: rgba(255,255,255,0.5);
+            background: var(--emerald-deep);
+            color: rgba(250,246,238,.55);
+            position: relative;
         }
 
+            .site-footer::before {
+                content: '';
+                display: block;
+                height: 3px;
+                background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+            }
+
         .footer-top {
-            padding: 60px 0 40px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 64px 0 40px;
+            border-bottom: 1px solid rgba(250,246,238,.08);
         }
 
         .footer-brand {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Fraunces', serif;
             font-size: 1.5rem;
-            font-weight: 900;
-            color: white;
-            margin-bottom: 12px;
+            font-weight: 600;
+            color: var(--ivory);
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            letter-spacing: .06em;
         }
 
         .footer-brand-desc {
             font-size: 13px;
-            color: rgba(255,255,255,0.4);
-            line-height: 1.7;
-            max-width: 260px;
+            color: rgba(250,246,238,.4);
+            line-height: 1.75;
+            max-width: 270px;
         }
 
         .footer-heading {
             font-size: 11px;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: .2em;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.3);
-            margin-bottom: 20px;
+            color: var(--gold-light);
+            margin-bottom: 22px;
         }
 
         .footer-link {
             display: block;
-            color: rgba(255,255,255,0.5);
+            color: rgba(250,246,238,.55);
             text-decoration: none;
             font-size: 13px;
-            margin-bottom: 10px;
+            margin-bottom: 11px;
             transition: var(--transition);
         }
 
             .footer-link:hover {
-                color: white;
-                padding-left: 4px;
+                color: var(--ivory);
+                padding-left: 5px;
             }
 
         .footer-social {
             display: flex;
             gap: 10px;
-            margin-top: 24px;
+            margin-top: 26px;
         }
 
         .social-btn {
             width: 36px;
             height: 36px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 8px;
+            background: rgba(250,246,238,.06);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgba(255,255,255,0.5);
+            color: rgba(250,246,238,.55);
             font-size: 14px;
             text-decoration: none;
             transition: var(--transition);
         }
 
             .social-btn:hover {
-                background: var(--accent);
-                color: white;
+                background: var(--gold);
+                color: var(--emerald-deep);
+            }
+
+        .trust-tile {
+            background: rgba(250,246,238,.045);
+            padding: 15px 16px;
+            display: flex;
+            gap: 11px;
+            align-items: center;
+            border: 1px solid rgba(250,246,238,.06);
+            transition: var(--transition);
+        }
+
+            .trust-tile:hover {
+                border-color: rgba(182,135,47,.35);
+                background: rgba(250,246,238,.07);
             }
 
         .footer-bottom {
@@ -464,18 +587,18 @@
 
         .footer-bottom-links {
             display: flex;
-            gap: 20px;
+            gap: 22px;
         }
 
             .footer-bottom-links a {
                 font-size: 12px;
-                color: rgba(255,255,255,0.35);
+                color: rgba(250,246,238,.35);
                 text-decoration: none;
                 transition: var(--transition);
             }
 
                 .footer-bottom-links a:hover {
-                    color: rgba(255,255,255,0.7);
+                    color: rgba(250,246,238,.75);
                 }
 
         @@media (max-width: 767px) {
@@ -492,185 +615,95 @@
 </head>
 <body>
 
+    <div class="topbar">Complimentary shipping on orders over <strong>₹999</strong> &nbsp;·&nbsp; Certified authentic, always</div>
+
     <!-- ===== NAVBAR ===== -->
-    <header class="main-header">
-        <nav class="navbar navbar-expand-sm container-fluid px-3 px-lg-4">
+    <header class="main-header" style="padding: 15px 0 10px 0;">
+        <div class="container-fluid px-3 px-lg-5">
+            <div class="d-flex justify-content-between align-items-center position-relative mb-2">
+                <div style="width: 90px;" class="d-flex align-items-center">
+                    <button type="button" class="menu-toggle-btn" id="mobileMenuOpenBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNavPanel">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
 
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                <i class="fas fa-store" style="font-size:18px; color: var(--accent);"></i>
-                BrandsStore<span class="brand-dot"></span>
-            </a>
+                <a class="navbar-brand text-uppercase mx-auto" asp-controller="Home" asp-action="Index">
+                    <span class="brand-mark"></span> AQSA COLLECTION
+                </a>
 
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <div class="d-flex align-items-center gap-1" style="width: 90px; justify-content: flex-end;">
+                    <a asp-controller="Home" asp-action="Products" class="nav-icon-btn" title="Search"><i class="fas fa-search"></i></a>
+                    <a asp-controller="Wishlist" asp-action="Index" class="nav-icon-btn position-relative" title="Wishlist">
+                        <i class="fas fa-heart"></i>
+                        <span class="nav-badge" id="wishlistBadge" style="display:none;">0</span>
+                    </a>
+                    <a asp-controller="Cart" asp-action="Index" class="nav-icon-btn position-relative" title="Cart">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="nav-badge" id="cartBadge" style="display:none;">0</span>
+                    </a>
+                </div>
+            </div>
 
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav me-auto gap-1 mt-2 mt-sm-0">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Index">
-                            <i class="fas fa-home"></i> Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Products">
-                            <i class="fas fa-shopping-bag"></i> Products
-                        </a>
-                    </li>
-
-                    <!-- ✅ FIXED: Categories dropdown uses categoryId (int) NOT category name (string) -->
-                    <!-- IDs taken from your Admin > Categories page screenshot -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-th-large"></i> Categories
-                        </a>
-                        <ul class="dropdown-menu" style="max-height: 460px; overflow-y: auto;">
-                            <!-- All Products -->
-                            <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Products">
-                                    <i class="fas fa-th"></i> All Categories
-                                </a>
-                            </li>
-                            <li><hr class="dropdown-divider"></li>
-
-                            <!-- ✅ Each item uses asp-route-categoryId with REAL IDs from your DB -->
-                            <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Products" asp-route-categoryId="8">
-                                    <i class="fas fa-watch"></i> Accessories
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Products" asp-route-categoryId="3">
-                                    <i class="fas fa-book"></i> Books
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Products" asp-route-categoryId="2">
-                                    <i class="fas fa-tshirt"></i> Clothing
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Products" asp-route-categoryId="1">
-                                    <i class="fas fa-laptop"></i> Electronics
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Products" asp-route-categoryId="4">
-                                    <i class="fas fa-home"></i> Home &amp; Kitchen
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Products" asp-route-categoryId="10">
-                                    <i class="fas fa-gem"></i> Jewelry
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Products" asp-route-categoryId="7">
-                                    <i class="fas fa-male"></i> Pants
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Products" asp-route-categoryId="6">
-                                    <i class="fas fa-shirt"></i> Shirts
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Products" asp-route-categoryId="5">
-                                    <i class="fas fa-shoe-prints"></i> Shoes
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" asp-controller="Home" asp-action="Products" asp-route-categoryId="9">
-                                    <i class="fas fa-dumbbell"></i> Sports &amp; Fitness
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                <i class="fas fa-cog"></i> Admin
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="Admin" asp-action="Index"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" asp-controller="Admin" asp-action="Products"><i class="fas fa-box"></i> Manage Products</a></li>
-                                <li><a class="dropdown-item" asp-controller="Admin" asp-action="Categories"><i class="fas fa-list"></i> Manage Categories</a></li>
-                                <li><a class="dropdown-item" asp-controller="Admin" asp-action="Orders"><i class="fas fa-shopping-cart"></i> Manage Orders</a></li>
-                            </ul>
-                        </li>
-                    }
-                </ul>
-
-                <!-- Right side -->
-                <ul class="navbar-nav align-items-center gap-1 mt-2 mt-sm-0">
+            <div class="desktop-nav-row" style="border-top: 1px solid rgba(18,32,27,.08); padding-top: 10px;">
+                <ul class="nav justify-content-center text-uppercase flex-nowrap" style="gap: 22px; overflow-x: auto; white-space: nowrap;">
+                    <li class="nav-item"><a class="premium-nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="nav-item"><a class="premium-nav-link" asp-controller="Home" asp-action="Products">New In</a></li>
+                    <li class="nav-item"><a class="premium-nav-link" asp-controller="Home" asp-action="Products" asp-route-search="Necklace">Necklaces</a></li>
+                    <li class="nav-item"><a class="premium-nav-link" asp-controller="Home" asp-action="Products" asp-route-search="Ring">Rings</a></li>
+                    <li class="nav-item"><a class="premium-nav-link" asp-controller="Home" asp-action="Products" asp-route-search="Earring">Earrings</a></li>
+                    <li class="nav-item"><a class="premium-nav-link" asp-controller="Home" asp-action="Products" asp-route-search="Bracelet">Bracelets</a></li>
+                    <li class="nav-item"><a class="premium-nav-link" asp-controller="Home" asp-action="Products" asp-route-categoryId="2">Accessories</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        @if (!User.IsInRole("Admin"))
+                        <li class="nav-item"><a class="premium-nav-link" asp-controller="Account" asp-action="Profile">Account</a></li>
+                        @if (User.IsInRole("Admin"))
                         {
-                            <li class="nav-item">
-                                <a class="nav-icon-btn" asp-controller="Wishlist" asp-action="Index" title="Wishlist">
-                                    <i class="fas fa-heart"></i>
-                                    <span class="nav-badge" id="wishlistBadge">0</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-icon-btn" asp-controller="Cart" asp-action="Index" title="Cart">
-                                    <i class="fas fa-shopping-bag"></i>
-                                    <span class="nav-badge" id="cartBadge">0</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Cart" asp-action="MyOrders" style="font-size:13px;">
-                                    <i class="fas fa-box"></i> Orders
-                                </a>
-                            </li>
-                            <li><div class="nav-sep d-none d-sm-block"></div></li>
+                            <li class="nav-item"><a class="premium-nav-link is-accent" asp-controller="Admin" asp-action="Index">Admin</a></li>
                         }
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle p-0" href="#" data-bs-toggle="dropdown" style="padding:0 !important;">
-                                <div class="user-pill">
-                                    <div class="user-avatar">@User.Identity.Name?.Substring(0, 1).ToUpper()</div>
-                                    <span class="d-none d-md-inline">@User.Identity.Name</span>
-                                    <i class="fas fa-chevron-down caret"></i>
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="fas fa-user"></i> My Profile</a></li>
-                                @if (!User.IsInRole("Admin"))
-                                {
-                                    <li><a class="dropdown-item" asp-controller="Wishlist" asp-action="Index"><i class="fas fa-heart"></i> My Wishlist</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Cart" asp-action="MyOrders"><i class="fas fa-box"></i> My Orders</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Cart" asp-action="Index"><i class="fas fa-shopping-bag"></i> My Cart</a></li>
-                                }
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword"><i class="fas fa-key"></i> Change Password</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <form asp-controller="Account" asp-action="Logout" method="post">
-                                        <button type="submit" class="dropdown-item" style="color: var(--accent);">
-                                            <i class="fas fa-sign-out-alt" style="color: var(--accent);"></i> Logout
-                                        </button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
                     }
                     else
                     {
-                        <li class="nav-item">
-                            <a class="btn-nav-login" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn-nav-register" asp-controller="Account" asp-action="Register">Register</a>
-                        </li>
+                        <li class="nav-item"><a class="premium-nav-link" asp-controller="Account" asp-action="Login">Account</a></li>
                     }
+                    <li class="nav-item"><a class="premium-nav-link" asp-controller="Cart" asp-action="Index">Cart (<span id="cartCountLabel">0</span>)</a></li>
                 </ul>
             </div>
-        </nav>
+        </div>
     </header>
+
+    <!-- ===== MOBILE OFF-CANVAS NAV ===== -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <nav class="mobile-nav-panel" id="mobileNavPanel" aria-label="Mobile navigation">
+        <div class="mobile-nav-head">
+            <span><span class="brand-mark" style="background:var(--gold-light);"></span> Menu</span>
+            <button type="button" class="mobile-nav-close" id="mobileMenuCloseBtn" aria-label="Close menu"><i class="fas fa-times"></i></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a asp-controller="Home" asp-action="Index">Home <i class="fas fa-arrow-right"></i></a></li>
+            <li><a asp-controller="Home" asp-action="Products">New In <i class="fas fa-arrow-right"></i></a></li>
+            <li><a asp-controller="Home" asp-action="Products" asp-route-search="Necklace">Necklaces <i class="fas fa-arrow-right"></i></a></li>
+            <li><a asp-controller="Home" asp-action="Products" asp-route-search="Ring">Rings <i class="fas fa-arrow-right"></i></a></li>
+            <li><a asp-controller="Home" asp-action="Products" asp-route-search="Earring">Earrings <i class="fas fa-arrow-right"></i></a></li>
+            <li><a asp-controller="Home" asp-action="Products" asp-route-search="Bracelet">Bracelets <i class="fas fa-arrow-right"></i></a></li>
+            <li><a asp-controller="Home" asp-action="Products" asp-route-categoryId="2">Accessories <i class="fas fa-arrow-right"></i></a></li>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li><a asp-controller="Account" asp-action="Profile">Account <i class="fas fa-arrow-right"></i></a></li>
+                @if (User.IsInRole("Admin"))
+                {
+                    <li><a class="is-accent" asp-controller="Admin" asp-action="Index">Admin <i class="fas fa-arrow-right"></i></a></li>
+                }
+            }
+            else
+            {
+                <li><a asp-controller="Account" asp-action="Login">Account <i class="fas fa-arrow-right"></i></a></li>
+            }
+        </ul>
+        <div class="mobile-nav-foot">
+            <a asp-controller="Wishlist" asp-action="Index"><i class="fas fa-heart"></i> Wishlist</a>
+            <a asp-controller="Cart" asp-action="Index"><i class="fas fa-shopping-bag"></i> Cart</a>
+        </div>
+    </nav>
 
     <!-- ===== ALERT ZONE ===== -->
     @if (TempData["Success"] != null || TempData["Error"] != null)
@@ -679,7 +712,7 @@
             @if (TempData["Success"] != null)
             {
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <i class="fas fa-check-circle" style="color: var(--green);"></i>
+                    <i class="fas fa-check-circle" style="color: var(--green-ok);"></i>
                     @TempData["Success"]
                     <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert"></button>
                 </div>
@@ -687,7 +720,7 @@
             @if (TempData["Error"] != null)
             {
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <i class="fas fa-exclamation-circle" style="color: var(--accent);"></i>
+                    <i class="fas fa-exclamation-circle" style="color:#b3432f;"></i>
                     @TempData["Error"]
                     <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert"></button>
                 </div>
@@ -706,10 +739,8 @@
             <div class="container">
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6">
-                        <div class="footer-brand">
-                            <i class="fas fa-store" style="color: var(--accent); font-size:18px;"></i> BrandsStore
-                        </div>
-                        <p class="footer-brand-desc">Your trusted destination for premium brands. Authentic products, unbeatable prices, delivered fast.</p>
+                        <div class="footer-brand text-uppercase"><span class="brand-mark"></span> AQSA COLLECTION</div>
+                        <p class="footer-brand-desc">Your premier online boutique for fine jewelry and luxury accessories. Cut, set and finished with elegance in every detail.</p>
                         <div class="footer-social">
                             <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
                             <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
@@ -720,10 +751,8 @@
                     <div class="col-lg-2 col-md-3 col-6">
                         <div class="footer-heading">Shop</div>
                         <a asp-controller="Home" asp-action="Products" class="footer-link">All Products</a>
-                        <a asp-controller="Home" asp-action="Products" asp-route-categoryId="1" class="footer-link">Electronics</a>
-                        <a asp-controller="Home" asp-action="Products" asp-route-categoryId="2" class="footer-link">Clothing</a>
-                        <a asp-controller="Home" asp-action="Products" asp-route-categoryId="5" class="footer-link">Shoes</a>
-                        <a asp-controller="Home" asp-action="Products" asp-route-categoryId="8" class="footer-link">Accessories</a>
+                        <a asp-controller="Home" asp-action="Products" asp-route-categoryId="1" class="footer-link">Jewelry</a>
+                        <a asp-controller="Home" asp-action="Products" asp-route-categoryId="2" class="footer-link">Accessories</a>
                     </div>
                     <div class="col-lg-2 col-md-3 col-6">
                         <div class="footer-heading">Account</div>
@@ -735,22 +764,10 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="footer-heading">Trust &amp; Security</div>
                         <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px;">
-                            <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:14px 16px; display:flex; gap:10px; align-items:center;">
-                                <i class="fas fa-shield-alt" style="color:var(--accent); font-size:16px;"></i>
-                                <div><div style="font-size:12px; color:white; font-weight:600;">Secure Pay</div><div style="font-size:11px; color:rgba(255,255,255,0.35);">256-bit SSL</div></div>
-                            </div>
-                            <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:14px 16px; display:flex; gap:10px; align-items:center;">
-                                <i class="fas fa-undo" style="color:var(--gold); font-size:16px;"></i>
-                                <div><div style="font-size:12px; color:white; font-weight:600;">Easy Returns</div><div style="font-size:11px; color:rgba(255,255,255,0.35);">30-day policy</div></div>
-                            </div>
-                            <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:14px 16px; display:flex; gap:10px; align-items:center;">
-                                <i class="fas fa-truck" style="color:#4facfe; font-size:16px;"></i>
-                                <div><div style="font-size:12px; color:white; font-weight:600;">Fast Delivery</div><div style="font-size:11px; color:rgba(255,255,255,0.35);">Free over ₹999</div></div>
-                            </div>
-                            <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:14px 16px; display:flex; gap:10px; align-items:center;">
-                                <i class="fas fa-certificate" style="color:var(--green); font-size:16px;"></i>
-                                <div><div style="font-size:12px; color:white; font-weight:600;">100% Genuine</div><div style="font-size:11px; color:rgba(255,255,255,0.35);">Verified brands</div></div>
-                            </div>
+                            <div class="trust-tile"><i class="fas fa-shield-alt" style="color:var(--gold-light); font-size:16px;"></i><div><div style="font-size:12px; color:var(--ivory); font-weight:600;">Secure Pay</div><div style="font-size:11px; color:rgba(250,246,238,.35);">256-bit SSL</div></div></div>
+                            <div class="trust-tile"><i class="fas fa-undo" style="color:var(--gold-light); font-size:16px;"></i><div><div style="font-size:12px; color:var(--ivory); font-weight:600;">Easy Returns</div><div style="font-size:11px; color:rgba(250,246,238,.35);">30-day policy</div></div></div>
+                            <div class="trust-tile"><i class="fas fa-truck" style="color:var(--gold-light); font-size:16px;"></i><div><div style="font-size:12px; color:var(--ivory); font-weight:600;">Fast Delivery</div><div style="font-size:11px; color:rgba(250,246,238,.35);">Free over ₹999</div></div></div>
+                            <div class="trust-tile"><i class="fas fa-certificate" style="color:var(--gold-light); font-size:16px;"></i><div><div style="font-size:12px; color:var(--ivory); font-weight:600;">100% Genuine</div><div style="font-size:11px; color:rgba(250,246,238,.35);">Verified brands</div></div></div>
                         </div>
                     </div>
                 </div>
@@ -758,7 +775,7 @@
         </div>
         <div class="container">
             <div class="footer-bottom">
-                <span>&copy; 2025 BrandsStore. All rights reserved.</span>
+                <span>&copy; 2026 AQSA COLLECTION. All rights reserved.</span>
                 <div class="footer-bottom-links">
                     <a asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
                     <a href="#">Terms of Service</a>
@@ -779,6 +796,7 @@
                 success: function (count) {
                     var badge = $('#cartBadge'); badge.text(count);
                     count > 0 ? badge.show() : badge.hide();
+                    $('#cartCountLabel').text(count);
                 }
             });
         }
@@ -794,13 +812,60 @@
         $(document).ready(function () {
             @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
             {
-                    <text>updateCartBadge(); updateWishlistBadge();</text>
+                        <text>updateCartBadge(); updateWishlistBadge();</text>
             }
         });
         @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
         {
-                <text>setInterval(function () { updateCartBadge(); updateWishlistBadge(); }, 30000);</text>
+                    <text>setInterval(function () { updateCartBadge(); updateWishlistBadge(); }, 30000);</text>
         }
+
+        // ===== Global scroll-reveal for any element carrying [data-reveal] =====
+        (function () {
+            var els = document.querySelectorAll('[data-reveal]');
+            if (!('IntersectionObserver' in window) || !els.length) {
+                els.forEach(function (el) { el.classList.add('in-view'); });
+                return;
+            }
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+            els.forEach(function (el) { io.observe(el); });
+        })();
+
+        // ===== Mobile off-canvas nav =====
+        (function () {
+            var openBtn = document.getElementById('mobileMenuOpenBtn');
+            var closeBtn = document.getElementById('mobileMenuCloseBtn');
+            var overlay = document.getElementById('mobileNavOverlay');
+            var panel = document.getElementById('mobileNavPanel');
+            if (!openBtn || !panel) return;
+
+            function openMenu() {
+                panel.classList.add('is-open');
+                overlay.classList.add('is-open');
+                document.body.classList.add('mobile-nav-locked');
+                openBtn.setAttribute('aria-expanded', 'true');
+            }
+            function closeMenu() {
+                panel.classList.remove('is-open');
+                overlay.classList.remove('is-open');
+                document.body.classList.remove('mobile-nav-locked');
+                openBtn.setAttribute('aria-expanded', 'false');
+            }
+
+            openBtn.addEventListener('click', openMenu);
+            closeBtn.addEventListener('click', closeMenu);
+            overlay.addEventListener('click', closeMenu);
+            panel.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+            window.addEventListener('resize', function () { if (window.innerWidth > 768) closeMenu(); });
+        })();
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)
